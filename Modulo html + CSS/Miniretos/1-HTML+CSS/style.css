@@ -1,0 +1,14 @@
+body {
+  background-color: rgb(202, 202, 202);
+  color: whitesmoke;
+}
+
+h1 {
+  text-transform: uppercase;
+  color: rgb(223, 136, 172);
+}
+
+li {
+  color: rgb(161, 103, 127);
+  font-style: italic;
+}
