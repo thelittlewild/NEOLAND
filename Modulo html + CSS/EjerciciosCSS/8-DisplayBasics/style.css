@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0 border-box;
+}
+
+div {
+  margin: 10;
+  padding: 10;
+  background-color: #e74c3c;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+}
+
+p {
+  margin: 10;
+  padding: 10;
+  background-color: #9b59b6;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+}
+
+span {
+  margin: 0;
+  padding: 0;
+  background-color: #3498db;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  background-color: #2ecc71;
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+}
