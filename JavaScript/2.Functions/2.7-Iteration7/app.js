@@ -15,12 +15,3 @@ const nameFinder = [
   "Jessica",
   "Marc",
 ];
-function finderName(param) {
-  let consultingName = [];
-  for (let index = 0; index < nameFinder.length; index++) {
-    const nameList = finderName[index];
-    if (consultingName.indexOf(nameList)) return ["true"];
-    else return ["false"];
-  }
-}
-console.log(finderName("Jungkook"(nameFinder)));
