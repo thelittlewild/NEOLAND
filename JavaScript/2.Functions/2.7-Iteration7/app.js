@@ -15,3 +15,15 @@ const nameFinder = [
   "Jessica",
   "Marc",
 ];
+
+const findName = (name, array) => {
+  if (array.includes(name)) {
+    return `true: El nombre ${name}, está en la posición ${array.indexOf(
+      name
+    )}`;
+  } else {
+    return false;
+  }
+};
+console.log(findName("Logan", nameFinder));
+console.log(findName("Jungkook", nameFinder));

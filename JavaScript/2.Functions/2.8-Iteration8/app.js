@@ -14,6 +14,16 @@ const counterWords = [
   "upgrade",
   "code",
 ];
-function repeatCounter(param) {
-  // insert code
-}
+
+const contador = (array) => {
+  let repeticiones = {};
+  array.forEach((element) => {
+    if (repeticiones.hasOwnProperty(element)) {
+      repeticiones[element] += 1;
+    } else {
+      repeticiones[element] = 0;
+    }
+  });
+  return repeticiones;
+};
+console.log(contador(counterWords));

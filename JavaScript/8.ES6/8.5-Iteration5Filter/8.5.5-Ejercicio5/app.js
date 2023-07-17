@@ -13,11 +13,7 @@ const streamers = [
 
 const sinVida = [];
 
-const filterData = streamers.filter(
-  (game) => game.gameMorePlayed.includes("League"),
-    if (age.streamers >= 35) return game.toUpperCase(gameMorePlayed)
-);
-
+const filterData = streamers.filter((game) => game.gameMorePlayed.includes["League"]) game.gameMorePlayed;
 console.log(sinVida);
 
 
