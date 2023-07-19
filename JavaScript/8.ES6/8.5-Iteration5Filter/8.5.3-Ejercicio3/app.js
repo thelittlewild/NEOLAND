@@ -8,8 +8,6 @@ const streamers = [
   { name: "AuronPlay", age: 33, gameMorePlayed: "Among Us" },
 ];
 
-const noSeQuieren = [];
-
 const filterData = streamers.filter(
   (game) => game.gameMorePlayed == "League of Legends"
 );

@@ -11,10 +11,14 @@ const streamers = [
   { name: "AuronPlay", age: 33, gameMorePlayed: "Among Us" },
 ];
 
-const sinVida = [];
+const filterData = streamers
+  .filter((game) => game.gameMorePlayed.includes("League"))
+  .map((game) => {
+    if (game.age > 35) {
+      return { ...game, gameMorePlayed: game.gameMorePlayed.toUpperCase() };
+    } else {
+      return game;
+    }
+  });
 
-const filterData = streamers.filter((game) => game.gameMorePlayed.includes["League"]) game.gameMorePlayed;
-console.log(sinVida);
-
-
-//-------------------SIN TERMINAR-------------------
+console.log(filterData);
