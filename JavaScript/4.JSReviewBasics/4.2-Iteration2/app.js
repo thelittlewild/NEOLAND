@@ -34,3 +34,7 @@ const users = [
     },
   },
 ];
+
+for (let person of users) {
+  let alias = person.name;
+}
