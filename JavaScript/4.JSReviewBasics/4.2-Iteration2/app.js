@@ -35,6 +35,26 @@ const users = [
   },
 ];
 
+const soundsMedia = {};
+
 for (let person of users) {
-  let alias = person.name;
+  for (const key in person.favoritesSounds) {
+    if (soundsMedia[key] == undefined) {
+      soundsMedia[key] = {
+        sum: person.favoritesSounds[key].volume,
+        elements: 1,
+        media: person.favoritesSounds[key].volume,
+      };
+    } else {
+      soundsMedia[key] = {
+        sum: person.favoritesSounds[key].volume + soundsMedia[key].sum,
+        elements: 1 + soundsMedia[key].elements,
+        media:
+          (person.favoritesSounds[key].volume + soundsMedia[key].sum) /
+          (1 + soundsMedia[key].elements),
+      };
+    }
+  }
 }
+
+console.log(soundsMedia);

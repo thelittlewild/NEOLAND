@@ -11,4 +11,10 @@ const streamers = [
   { name: "AuronPlay", age: 33, gameMorePlayed: "Among Us" },
 ];
 
-const buscador = streamers.filter((nombre) => nombre.name.includes());
+const toFilterStreamers = () => {
+  const inputValue = document.getElementById("textInput").value;
+  const streamersFiltered = streamers.filter((data) =>
+    data.name.includes(inputValue)
+  );
+  console.log(streamersFiltered);
+};
