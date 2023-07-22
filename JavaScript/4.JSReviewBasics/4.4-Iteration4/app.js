@@ -5,6 +5,8 @@
 
 function findArrayIndex(array, text) {}
 
+const findArrayIndex = (arr, text) => {};
+
 //Ej array:
 
 ["Caracol", "Mosquito", "Salamandra", "Ajolote"];
