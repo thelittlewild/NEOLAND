@@ -1,3 +1,5 @@
+import { printTemplateHeader, printTemplateFooter } from "../components";
+
 // Función que nos exporte:
 
 export const initTemplate = () => {
@@ -8,6 +10,9 @@ export const initTemplate = () => {
   const footer = document.createElement("footer");
 
   // inyectamos los elementos en el contenedor de la aplicación
+  console.log(app);
 
   app.append(header, main, footer);
+  printTemplateHeader();
+  printTemplateFooter();
 };
