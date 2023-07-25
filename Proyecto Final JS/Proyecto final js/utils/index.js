@@ -6,3 +6,4 @@ export * from "./changeColor";
 export * from "./axios";
 export * from "./dataPokemon";
 export * from "./pokemonType";
+export * from "./pagination";

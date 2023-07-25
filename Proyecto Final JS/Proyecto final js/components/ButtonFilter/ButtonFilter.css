@@ -1,0 +1,16 @@
+#filterButton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 90vw;
+  margin: 3rem 0 2rem 0;
+  opacity: 1;
+}
+
+.buttonFilter {
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+}

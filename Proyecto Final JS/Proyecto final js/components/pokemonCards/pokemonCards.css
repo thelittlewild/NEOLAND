@@ -7,6 +7,7 @@
   align-items: center;
   flex-direction: column;
   margin: 1rem;
+  z-index: -1;
 
   & img {
     width: 180px;
@@ -14,14 +15,18 @@
     animation: rebota 1s alternate infinite ease-in;
     transition: all 1s ease-in-out;
   }
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
-/*
+
 @keyframes rebota {
   100% {
     transform: translateY(5px);
   }
 }
-*/
+
 .grass {
   background-color: #63bb5b75;
 }
