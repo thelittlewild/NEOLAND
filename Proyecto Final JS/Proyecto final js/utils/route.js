@@ -1,5 +1,10 @@
 import { getUser } from "../global/state/globalState";
-import { Login, PrintPokemonPage, printTemplateDashboard } from "../pages";
+import {
+  Login,
+  PrintMemoryGame,
+  PrintPokemonPage,
+  printTemplateDashboard,
+} from "../pages";
 
 // -------------CONTROLADOR DE LO QUE SE RENDERIZA EN CADA MOMENTO --------------------
 
@@ -20,7 +25,7 @@ export const initControler = (pagesRender) => {
       printTemplateDashboard();
       break;
     case "MemoryGame":
-      "MemoryGame()";
+      PrintMemoryGame();
       break;
     case "Quiz":
       "Quiz()";

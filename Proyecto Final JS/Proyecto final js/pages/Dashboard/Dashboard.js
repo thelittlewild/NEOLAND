@@ -16,7 +16,7 @@ const template = () => `
       </figure>
       </li>
       <li>
-        <figure>
+        <figure id="navigateMemoryGame">
           <img src="https://i.imgur.com/RWlr1KI.gif" alt="go to memory game" />
           <h2>MEMORY GAME</h2>
         </figure>
@@ -27,8 +27,14 @@ const template = () => `
 
 const addEventListeners = () => {
   const navigatePokemon = document.getElementById("navigatePokemon");
+  const navigateMemoryGame = document.getElementById("navigateMemoryGame");
+
   navigatePokemon.addEventListener("click", () => {
     initControler("Pokemon");
+  });
+
+  navigateMemoryGame.addEventListener("click", () => {
+    initControler("MemoryGame");
   });
 };
 
