@@ -19,8 +19,8 @@ const dataMap = (data) => {
     name: pokemon.name,
     image: pokemon.sprites.other.dream_world.front_default,
     type: pokemon.types, // tipo del pokemon
-    // --4
-    // --5
+    height: pokemon.height,
+    weight: pokemon.weight,
   }));
   const types = pokemonType(filterData);
   dataGlobal = {

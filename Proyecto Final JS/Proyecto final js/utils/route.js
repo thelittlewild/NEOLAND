@@ -4,6 +4,7 @@ import {
   PrintMemoryGame,
   PrintPokemonPage,
   printTemplateDashboard,
+  PrintTresEnRaya,
 } from "../pages";
 
 // -------------CONTROLADOR DE LO QUE SE RENDERIZA EN CADA MOMENTO --------------------
@@ -29,6 +30,9 @@ export const initControler = (pagesRender) => {
       break;
     case "Quiz":
       "Quiz()";
+      break;
+    case "TresEnRaya":
+      PrintTresEnRaya();
       break;
     case "Login":
       Login();

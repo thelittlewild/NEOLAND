@@ -17,8 +17,14 @@ const template = () => `
       </li>
       <li>
         <figure id="navigateMemoryGame">
-          <img src="https://i.imgur.com/RWlr1KI.gif" alt="go to memory game" />
+          <img src="https://media2.giphy.com/media/9oa3sE4IdWbqO61WGT/giphy.gif?cid=82a1493betq28l6jebdgmybealj7yiqwazbws62lv70he6ba&ep=v1_gifs_search&rid=giphy.gif" alt="go to memory game" />
           <h2>MEMORY GAME</h2>
+        </figure>
+      </li>
+      <li>
+        <figure id="navigateTresEnRaya">
+          <img src="https://i.imgur.com/RWlr1KI.gif" alt="go to tres en raya" />
+          <h2>3 EN RAYA</h2>
         </figure>
       </li>
     </ul>
@@ -28,6 +34,7 @@ const template = () => `
 const addEventListeners = () => {
   const navigatePokemon = document.getElementById("navigatePokemon");
   const navigateMemoryGame = document.getElementById("navigateMemoryGame");
+  const navigateTresEnRaya = document.getElementById("navigateTresEnRaya");
 
   navigatePokemon.addEventListener("click", () => {
     initControler("Pokemon");
@@ -35,6 +42,11 @@ const addEventListeners = () => {
 
   navigateMemoryGame.addEventListener("click", () => {
     initControler("MemoryGame");
+  });
+
+  navigateTresEnRaya.addEventListener("click", () => {
+    initControler("TresEnRaya");
+    console.log("holi");
   });
 };
 

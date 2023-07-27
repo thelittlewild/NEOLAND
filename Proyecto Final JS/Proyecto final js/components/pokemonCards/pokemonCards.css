@@ -45,7 +45,7 @@ figure.bug {
   background-color: #8fc12c80;
 }
 .bug-button {
-  background-color: #8fc12c80;
+  background-color: #8fc12c;
 }
 
 figure.dark {
@@ -55,7 +55,7 @@ figure.dark {
   background-color: #5a536687;
 }
 .dark-button {
-  background-color: #5a536687;
+  background-color: #5a5366;
 }
 
 figure.dragon {
@@ -65,7 +65,7 @@ figure.dragon {
   background-color: #0a6dc482;
 }
 .dragon-button {
-  background-color: #0a6dc482;
+  background-color: #0a6dc4;
 }
 
 figure.electric {
@@ -75,7 +75,7 @@ figure.electric {
   background-color: #f3d13b75;
 }
 .electric-button {
-  background-color: #f3d13b75;
+  background-color: #f3d13b;
 }
 
 figure.fairy {
@@ -85,7 +85,7 @@ figure.fairy {
   background-color: #ec8fe67e;
 }
 .fairy-button {
-  background-color: #ec8fe67e;
+  background-color: #ec8fe6;
 }
 
 figure.fighting {
@@ -95,7 +95,7 @@ figure.fighting {
   background-color: #ce406884;
 }
 .fighting-button {
-  background-color: #ce406884;
+  background-color: #ce4068;
 }
 
 figure.fire {
@@ -105,7 +105,7 @@ figure.fire {
   background-color: #ff9b546f;
 }
 .fire-button {
-  background-color: #ff9b546f;
+  background-color: #ff9b54;
 }
 
 figure.flying {
@@ -115,7 +115,7 @@ figure.flying {
   background-color: #8fa8dd7c;
 }
 .flying-button {
-  background-color: #8fa8dd7c;
+  background-color: #8fa8dd;
 }
 
 figure.ghost {
@@ -125,7 +125,7 @@ figure.ghost {
   background-color: #5269ac7e;
 }
 .ghost-button {
-  background-color: #5269ac7e;
+  background-color: #5269ac;
 }
 
 figure.ground {
@@ -135,17 +135,17 @@ figure.ground {
   background-color: #d977467c;
 }
 .ground-button {
-  background-color: #d977467c;
+  background-color: #d97746;
 }
 
 figure.ice {
   border: 10px solid #74cec1;
 }
 .ice {
-  background-color: #74cec17e;
+  background-color: #74cec1;
 }
 .ice-button {
-  background-color: #74cec17e;
+  background-color: #74cec1;
 }
 
 figure.normal {
@@ -155,7 +155,7 @@ figure.normal {
   background-color: #9099a17b;
 }
 .normal-button {
-  background-color: #9099a17b;
+  background-color: #9099a1;
 }
 
 figure.poison {
@@ -165,7 +165,7 @@ figure.poison {
   background-color: #aa6ac87a;
 }
 .poison-button {
-  background-color: #aa6ac87a;
+  background-color: #aa6ac8;
 }
 
 figure.psychic {
@@ -175,7 +175,7 @@ figure.psychic {
   background-color: #f971767e;
 }
 .psychic-button {
-  background-color: #f971767e;
+  background-color: #f97176;
 }
 
 figure.rock {
@@ -185,7 +185,7 @@ figure.rock {
   background-color: #c7b78b78;
 }
 .rock-button {
-  background-color: #c7b78b78;
+  background-color: #c7b78b;
 }
 
 figure.steel {
@@ -195,7 +195,7 @@ figure.steel {
   background-color: #5a8ea17e;
 }
 .steel-button {
-  background-color: #5a8ea17e;
+  background-color: #5a8ea1;
 }
 
 figure.water {
@@ -205,5 +205,5 @@ figure.water {
   background-color: #4d91d575;
 }
 .water-button {
-  background-color: #4d91d575;
+  background-color: #4d91d5;
 }

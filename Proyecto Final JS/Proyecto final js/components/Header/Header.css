@@ -37,7 +37,8 @@ header {
     }
   }
   & nav {
-    width: 30vw;
+    width: 20vw;
+    max-width: 270px;
     display: flex;
     justify-content: center;
     align-items: center;
