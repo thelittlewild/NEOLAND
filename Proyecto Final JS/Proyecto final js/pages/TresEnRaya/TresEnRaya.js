@@ -6,22 +6,22 @@ const template = () => `
     <div id="winnerIMG"></div>
     <div id="containerTresEnRaya">
       <div>
-        <button id="inputCasilla1"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla1" /></button>
-        <button id="inputCasilla2"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla2" /></button>
-        <button id="inputCasilla3"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla3" /></button>
+        <button id="inputCasilla1" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla1" /></button>
+        <button id="inputCasilla2" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla2" /></button>
+        <button id="inputCasilla3" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla3" /></button>
       </div>
       <div>
-        <button id="inputCasilla4"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla4" /></button>
-        <button id="inputCasilla5"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla5" /></button>
-        <button id="inputCasilla6"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla6" /></button>
+        <button id="inputCasilla4" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla4" /></button>
+        <button id="inputCasilla5" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla5" /></button>
+        <button id="inputCasilla6" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla6" /></button>
       </div>
       <div>
-        <button id="inputCasilla7"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla7" /></button>
-        <button id="inputCasilla8"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla8" /></button>
-        <button id="inputCasilla9"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla9" /></button>
+        <button id="inputCasilla7" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla7" /></button>
+        <button id="inputCasilla8" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla8" /></button>
+        <button id="inputCasilla9" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla9" /></button>
       </div>
 
-      <button id="reset">Reset</button>
+      <button id="reset" class="reset">RESET</button>
     </div>
   </div>
 `;
@@ -123,32 +123,23 @@ const resetGame = () => {
   winnerIMG.innerHTML = "";
 
   const imgCasilla1 = document.getElementById("imgCasilla1");
-  imgCasilla1.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla1.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla2 = document.getElementById("imgCasilla2");
-  imgCasilla2.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla2.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla3 = document.getElementById("imgCasilla3");
-  imgCasilla3.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla3.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla4 = document.getElementById("imgCasilla4");
-  imgCasilla4.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla4.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla5 = document.getElementById("imgCasilla5");
-  imgCasilla5.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla5.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla6 = document.getElementById("imgCasilla6");
-  imgCasilla6.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla6.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla7 = document.getElementById("imgCasilla7");
-  imgCasilla7.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla7.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla8 = document.getElementById("imgCasilla8");
-  imgCasilla8.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla8.src = "https://i.imgur.com/pu6BPiv.png";
   const imgCasilla9 = document.getElementById("imgCasilla9");
-  imgCasilla9.src =
-    "https://img.freepik.com/premium-vector/white-texture-round-striped-surface-white-soft-cover_547648-928.jpg?w=2000";
+  imgCasilla9.src = "https://i.imgur.com/pu6BPiv.png";
   validPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   winnerCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 };

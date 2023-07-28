@@ -155,67 +155,132 @@ const template = () => `
 `;
 //--------------------
 
-export const PrintMemoryGame = () => {
-  document.querySelector("main").innerHTML = template();
-};
 //----------------
-const cards = document.querySelectorAll(".memory-card");
 
-let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
-
-function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
-
-  this.classList.add("flip");
-
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
-
-    return;
+let contador = 0;
+let ok = 0;
+let segundos;
+let intervalo;
+//! -------------------------------------------------------la logica DEL JUEGO -----------
+const flipCard = (e, card) => {
+  console.log(e);
+  console.log(card);
+  if (!lockBoard) {
+    card.classList.add("flip");
+    const numberFlip = document.querySelectorAll(".flip");
+    if (numberFlip.length === 2) {
+      console.log("entro en la parte del length");
+      lockBoard = true;
+      checkForMatch(numberFlip);
+    }
   }
+};
 
-  secondCard = this;
-  checkForMatch();
-}
+const checkForMatch = (numberFlip) => {
+  contador++;
+  console.log(contador);
+  let isMatch = numberFlip[0].id === numberFlip[1].id;
+  console.log(isMatch);
+  isMatch ? disableCards(numberFlip) : unflipCards(numberFlip);
+};
 
-function checkForMatch() {
-  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-  isMatch ? disableCards() : unflipCards();
-}
-
-function disableCards() {
-  firstCard.removeEventListener("click", flipCard);
-  secondCard.removeEventListener("click", flipCard);
+const disableCards = (numberFlip) => {
+  ok++;
+  console.log(ok + "💯");
+  numberFlip[0].removeEventListener("click", flipCard);
+  numberFlip[1].removeEventListener("click", flipCard);
+  numberFlip[0].classList.add("flipOk");
+  numberFlip[1].classList.add("flipOk");
+  numberFlip[0].classList.remove("flip");
+  numberFlip[1].classList.remove("flip");
 
   resetBoard();
-}
+};
 
-function unflipCards() {
+function unflipCards(numberFlip) {
   lockBoard = true;
 
   setTimeout(() => {
-    firstCard.classList.remove("flip");
-    secondCard.classList.remove("flip");
+    console.log("entro");
+    numberFlip[0].classList.remove("flip");
+    numberFlip[1].classList.remove("flip");
 
     resetBoard();
   }, 1500);
 }
 
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
-}
+const resetBoard = () => {
+  lockBoard = false;
+};
 
-(function shuffle() {
+//! -------------------------------------- LA LOGICA DEL PINTADO DEL JUEGO --------------------------------
+const shuffle = () => {
+  const cards = document.querySelectorAll(".memory-card");
   cards.forEach((card) => {
     let randomPos = Math.floor(Math.random() * 12);
     card.style.order = randomPos;
   });
-})();
+  addListeners(cards);
+  segundos = 5;
+  intervalo = setInterval(time, 1000);
+};
 
-cards.forEach((card) => card.addEventListener("click", flipCard));
+const addListeners = (cards) => {
+  cards.forEach((card) =>
+    card.addEventListener("click", (e) => flipCard(e, card))
+  );
+};
+
+const time = () => {
+  segundos--;
+  console.log(segundos);
+  const containerTime = document.getElementById("time");
+  const segundosTime = `<h4>${segundos}</h4>`;
+  containerTime.innerHTML = segundosTime;
+  checkInterval();
+};
+
+const checkInterval = () => {
+  console.log(segundos);
+  if (segundos === 0) {
+    console.log("entro en los segundos");
+    clearInterval(intervalo);
+    const timer = document.getElementById("time");
+    timer.innerHTML = "";
+    const memory = document.querySelector(".memory-game");
+    const templateEnd = `<div class="containerEnd"><h1> Has finalizado el juego</h1>
+    <h4>${ok === 6 ? "Has ganado🎉" : "Has perdido 💥"}</h4>
+    <h6>Movimientos: ${contador}</h6>
+    <button id="resetButton">RESET</button></div>`;
+    //! --------------------confeti -----------------------
+    if (ok === 6) {
+      const jsConfetti = new JSConfetti();
+
+      jsConfetti.addConfetti();
+    } else {
+      const jsConfetti = new JSConfetti();
+
+      jsConfetti.addConfetti({
+        emojis: ["😪"],
+      });
+    }
+    //!---------------------------------------------------------------------
+    memory.innerHTML = "";
+    memory.innerHTML = templateEnd;
+    const reset = document.querySelector("#resetButton");
+    reset.addEventListener("click", () => {
+      contador = 0;
+      ok = 0;
+      segundos = 60;
+      document.querySelector("#app").innerHTML = template();
+      shuffle();
+    });
+  }
+};
+
+export const PrintMemoryGame = () => {
+  document.querySelector("main").innerHTML = template();
+  shuffle();
+};
