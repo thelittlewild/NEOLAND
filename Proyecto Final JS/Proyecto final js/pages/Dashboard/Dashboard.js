@@ -10,7 +10,7 @@ const template = () => `
           <h2>POKEMON</h2>
         </figure>
       </li>
-      <li><figure>
+      <li><figure id="navigateQuiz">
         <img src="https://i.imgur.com/tWCP3Sg.gif" alt="go to quiz" />
         <h2>QUIZ</h2>
       </figure>
@@ -35,6 +35,7 @@ const addEventListeners = () => {
   const navigatePokemon = document.getElementById("navigatePokemon");
   const navigateMemoryGame = document.getElementById("navigateMemoryGame");
   const navigateTresEnRaya = document.getElementById("navigateTresEnRaya");
+  const navigateQuiz = document.getElementById("navigateQuiz");
 
   navigatePokemon.addEventListener("click", () => {
     initControler("Pokemon");
@@ -44,9 +45,12 @@ const addEventListeners = () => {
     initControler("MemoryGame");
   });
 
+  navigateQuiz.addEventListener("click", () => {
+    initControler("Quiz");
+  });
+
   navigateTresEnRaya.addEventListener("click", () => {
     initControler("TresEnRaya");
-    console.log("holi");
   });
 };
 

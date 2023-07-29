@@ -2,7 +2,9 @@ import "./Memory.css";
 import JSConfetti from "js-confetti";
 
 const template = () => `
-  <div="containerCards">
+
+<div="containerCards">
+<div id="time"></div>  
 <section class="memory-game">
   
     <div class="memory-card" id="Cat1" data-framework="Cat1">
@@ -155,7 +157,7 @@ const template = () => `
       />
     </div>
   </section>
-  <div id="time"></div>
+  
   </div>
 `;
 //--------------------
@@ -221,7 +223,7 @@ const shuffle = () => {
     card.style.order = randomPos;
   });
   addListeners(cards);
-  segundos = 15;
+  segundos = 10;
   intervalo = setInterval(time, 1000);
 };
 
@@ -245,8 +247,8 @@ const checkInterval = () => {
     const timer = document.getElementById("time");
     timer.innerHTML = "";
     const memory = document.querySelector(".memory-game");
-    const templateEnd = `<div class="containerEnd"><h1> Has finalizado el juego</h1>
-    <h4>${ok === 6 ? "Has ganado🌸" : "Has perdido 💥"}</h4>
+    const templateEnd = `<div class="containerEnd"><h2> Has finalizado el juego</h2>
+    <h4>${ok === 6 ? "🌸Has ganado🌸" : "Has perdido 💥"}</h4>
     <h6>Movimientos: ${contador}</h6>
     <button id="resetButton">RESET</button></div>`;
     //! --------------------confeti -----------------------

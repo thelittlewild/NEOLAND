@@ -23,3 +23,9 @@ const mutations = [
     description: "Invoca a un señor mayor como Personal Trainer",
   },
 ];
+
+const findAlien = aliens.find(({ name }) => name === "Cucushumushu");
+
+const mutation = mutations.find(({ name }) => name === "Porompompero");
+
+console.log({ ...findAlien, mutation });

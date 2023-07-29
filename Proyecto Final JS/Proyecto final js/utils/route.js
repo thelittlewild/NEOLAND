@@ -4,6 +4,7 @@ import {
   PrintMemoryGame,
   PrintPokemonPage,
   printTemplateDashboard,
+  PrintQuiz,
   PrintTresEnRaya,
 } from "../pages";
 
@@ -28,7 +29,7 @@ export const initControler = (pagesRender) => {
       PrintMemoryGame();
       break;
     case "Quiz":
-      "Quiz()";
+      PrintQuiz();
       break;
     case "TresEnRaya":
       PrintTresEnRaya();

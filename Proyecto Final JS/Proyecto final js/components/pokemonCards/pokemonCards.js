@@ -7,7 +7,8 @@ export const pokemonCards = (data) => {
     const figureTemplate = `
      <figure class=${classCustomType}>
     <img src=${pokemon.image} alt=${pokemon.name} /> 
-    <h2>${pokemon.name}</h2>
+    <h2 id="pokemonName">${pokemon.name}</h2>
+    <h1 id="pokemonSize">${pokemon.height} || ${pokemon.weight}</h1>
     </figure>`;
     document.getElementById("pokemonGallery").innerHTML += figureTemplate;
   });

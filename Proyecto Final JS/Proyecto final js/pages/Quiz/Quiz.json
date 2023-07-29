@@ -1,0 +1,28 @@
+[
+  {
+    "idol": "Jungkook",
+    "group": "BTS",
+    "img": "https://img8.yna.co.kr/photo/yna/YH/2023/07/25/PYH2023072501050088300_P4.jpg"
+  },
+  { "idol": "RM", "group": "BTS", "img": "https://i.imgur.com/i5qiIsD.png" },
+  { "idol": "Jin", "group": "BTS", "img": "https://i.imgur.com/3tw7Giu.png" },
+  { "idol": "Suga", "group": "BTS", "img": "https://i.imgur.com/gMqhEwb.png" },
+  {
+    "idol": "J-Hope",
+    "group": "BTS",
+    "img": "https://i.imgur.com/4Zl3nmz.png"
+  },
+  { "idol": "Jimin", "group": "BTS", "img": "https://i.imgur.com/wKaqQ4G.png" },
+  {
+    "idol": "BangChan",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/thfD9OY.gif"
+  },
+  { "idol": "Kai", "group": "EXO", "img": "https://i.imgur.com/VLOgstg.png" },
+  {
+    "idol": "Yeonjun",
+    "group": "TxT",
+    "img": "https://i.imgur.com/FvYXwXZ.png"
+  },
+  { "idol": "San", "group": "Ateez", "img": "https://i.imgur.com/XC5xtsR.png" }
+]

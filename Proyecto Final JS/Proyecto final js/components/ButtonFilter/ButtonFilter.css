@@ -13,10 +13,12 @@
   width: 90vw;
   margin: 3rem 0 2rem 0;
   opacity: 1;
+  border-color: black;
 }
 
 .buttonFilter {
   width: 80px;
   height: 30px;
   border-radius: 20px;
+  border-color: black;
 }

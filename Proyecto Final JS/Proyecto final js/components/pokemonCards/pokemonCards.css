@@ -7,18 +7,26 @@
   align-items: center;
   flex-direction: column;
   margin: 1rem;
-  z-index: -1;
+  z-index: 5;
 
   & img {
-    width: 180px;
-    height: 180px;
-    animation: rebota 1s alternate infinite ease-in;
-    transition: all 1s ease-in-out;
+    width: 160px;
+    height: 160px;
+    max-height: 160px;
+  }
+  &:hover img {
+    animation: rebota 0.7s alternate infinite ease-in;
+    transition: 1s ease-in-out;
   }
 
   &:hover {
     transform: scale(1.2);
   }
+}
+
+h2.pokemonName {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: pink;
 }
 
 @keyframes rebota {
@@ -142,7 +150,7 @@ figure.ice {
   border: 10px solid #74cec1;
 }
 .ice {
-  background-color: #74cec1;
+  background-color: #74cec17e;
 }
 .ice-button {
   background-color: #74cec1;
