@@ -11,7 +11,6 @@ import {
 
 // qué componente quiere renderizar (pagesRender):
 export const initControler = (pagesRender) => {
-  console.log("soy el user", getUser().name); // para mantener el user cuando recargue
   // va a renderizar el Login:
   switch (pagesRender) {
     case undefined:

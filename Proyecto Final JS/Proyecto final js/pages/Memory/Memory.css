@@ -32,6 +32,10 @@
   transform: rotateY(180deg);
 }
 
+.memory-card.flipOk {
+  transform: rotateY(180deg);
+}
+
 .front-face,
 .back-face {
   width: 100%;
@@ -45,4 +49,8 @@
 
 .front-face {
   transform: rotateY(180deg);
+}
+
+#time {
+  align-items: right;
 }

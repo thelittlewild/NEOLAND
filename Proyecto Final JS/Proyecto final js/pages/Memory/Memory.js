@@ -1,7 +1,10 @@
 import "./Memory.css";
+import JSConfetti from "js-confetti";
 
 const template = () => `
-  <section class="memory-game">
+  <div="containerCards">
+<section class="memory-game">
+  
     <div class="memory-card" id="Cat1" data-framework="Cat1">
       <img
         class="front-face"
@@ -152,10 +155,10 @@ const template = () => `
       />
     </div>
   </section>
+  <div id="time"></div>
+  </div>
 `;
 //--------------------
-
-//----------------
 
 let lockBoard = false;
 let firstCard, secondCard;
@@ -165,13 +168,10 @@ let segundos;
 let intervalo;
 //! -------------------------------------------------------la logica DEL JUEGO -----------
 const flipCard = (e, card) => {
-  console.log(e);
-  console.log(card);
   if (!lockBoard) {
     card.classList.add("flip");
     const numberFlip = document.querySelectorAll(".flip");
     if (numberFlip.length === 2) {
-      console.log("entro en la parte del length");
       lockBoard = true;
       checkForMatch(numberFlip);
     }
@@ -180,15 +180,12 @@ const flipCard = (e, card) => {
 
 const checkForMatch = (numberFlip) => {
   contador++;
-  console.log(contador);
   let isMatch = numberFlip[0].id === numberFlip[1].id;
-  console.log(isMatch);
   isMatch ? disableCards(numberFlip) : unflipCards(numberFlip);
 };
 
 const disableCards = (numberFlip) => {
   ok++;
-  console.log(ok + "💯");
   numberFlip[0].removeEventListener("click", flipCard);
   numberFlip[1].removeEventListener("click", flipCard);
   numberFlip[0].classList.add("flipOk");
@@ -197,13 +194,14 @@ const disableCards = (numberFlip) => {
   numberFlip[1].classList.remove("flip");
 
   resetBoard();
+  if (ok === 6) segundos = 1;
+  // ok === 6 && (segundos = 1);
 };
 
 function unflipCards(numberFlip) {
   lockBoard = true;
 
   setTimeout(() => {
-    console.log("entro");
     numberFlip[0].classList.remove("flip");
     numberFlip[1].classList.remove("flip");
 
@@ -223,7 +221,7 @@ const shuffle = () => {
     card.style.order = randomPos;
   });
   addListeners(cards);
-  segundos = 5;
+  segundos = 15;
   intervalo = setInterval(time, 1000);
 };
 
@@ -235,7 +233,6 @@ const addListeners = (cards) => {
 
 const time = () => {
   segundos--;
-  console.log(segundos);
   const containerTime = document.getElementById("time");
   const segundosTime = `<h4>${segundos}</h4>`;
   containerTime.innerHTML = segundosTime;
@@ -243,22 +240,22 @@ const time = () => {
 };
 
 const checkInterval = () => {
-  console.log(segundos);
   if (segundos === 0) {
-    console.log("entro en los segundos");
     clearInterval(intervalo);
     const timer = document.getElementById("time");
     timer.innerHTML = "";
     const memory = document.querySelector(".memory-game");
     const templateEnd = `<div class="containerEnd"><h1> Has finalizado el juego</h1>
-    <h4>${ok === 6 ? "Has ganado🎉" : "Has perdido 💥"}</h4>
+    <h4>${ok === 6 ? "Has ganado🌸" : "Has perdido 💥"}</h4>
     <h6>Movimientos: ${contador}</h6>
     <button id="resetButton">RESET</button></div>`;
     //! --------------------confeti -----------------------
     if (ok === 6) {
       const jsConfetti = new JSConfetti();
 
-      jsConfetti.addConfetti();
+      jsConfetti.addConfetti({
+        emojis: ["🌸"],
+      });
     } else {
       const jsConfetti = new JSConfetti();
 
@@ -274,7 +271,7 @@ const checkInterval = () => {
       contador = 0;
       ok = 0;
       segundos = 60;
-      document.querySelector("#app").innerHTML = template();
+      document.querySelector("main").innerHTML = template();
       shuffle();
     });
   }
