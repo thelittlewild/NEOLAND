@@ -77,8 +77,8 @@ const addListeners = () => {
   });
 };
 
-var validPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // array que va a ir "tachando" posiciones ocupadas
-var winnerCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let validPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9]; // array que va a ir "tachando" posiciones ocupadas
+let winnerCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 const turn = (position) => {
   const validMovement = player1Turn(position); //solo cuenta el turno si es válido
