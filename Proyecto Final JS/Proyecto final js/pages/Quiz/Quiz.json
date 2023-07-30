@@ -2,27 +2,71 @@
   {
     "idol": "Jungkook",
     "group": "BTS",
-    "img": "https://img8.yna.co.kr/photo/yna/YH/2023/07/25/PYH2023072501050088300_P4.jpg"
+    "img": "https://i.imgur.com/NMvG8G5.png"
   },
-  { "idol": "RM", "group": "BTS", "img": "https://i.imgur.com/i5qiIsD.png" },
-  { "idol": "Jin", "group": "BTS", "img": "https://i.imgur.com/3tw7Giu.png" },
-  { "idol": "Suga", "group": "BTS", "img": "https://i.imgur.com/gMqhEwb.png" },
+  { "idol": "RM", "group": "BTS", "img": "https://i.imgur.com/foL8VGz.png" },
+  { "idol": "Jin", "group": "BTS", "img": "https://i.imgur.com/cZnke0H.png" },
+  { "idol": "Suga", "group": "BTS", "img": "https://i.imgur.com/t7lkC6C.png" },
   {
     "idol": "J-Hope",
     "group": "BTS",
-    "img": "https://i.imgur.com/4Zl3nmz.png"
+    "img": "https://i.imgur.com/dcYdVR2.png"
   },
-  { "idol": "Jimin", "group": "BTS", "img": "https://i.imgur.com/wKaqQ4G.png" },
+  { "idol": "Jimin", "group": "BTS", "img": "https://i.imgur.com/154wsdC.png" },
   {
     "idol": "BangChan",
     "group": "StrayKids",
-    "img": "https://i.imgur.com/thfD9OY.gif"
+    "img": "https://i.imgur.com/Te2Rukw.png"
   },
-  { "idol": "Kai", "group": "EXO", "img": "https://i.imgur.com/VLOgstg.png" },
+  {
+    "idol": "BangChan",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/Te2Rukw.png"
+  },
+  {
+    "idol": "Felix",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/qttSqwd.png"
+  },
+  {
+    "idol": "Hyunjin",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/Q9aFthZ.png"
+  },
+  {
+    "idol": "Han",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/Dt3zp7x.png"
+  },
+  {
+    "idol": "IN",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/HLDrQbD.png"
+  },
+  {
+    "idol": "Changbin",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/0esIkEE.png"
+  },
+  {
+    "idol": "Lee Know",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/tWkeTY6.png"
+  },
+  {
+    "idol": "Seungmin",
+    "group": "StrayKids",
+    "img": "https://i.imgur.com/aFdI5CM.png"
+  },
+  { "idol": "Kai", "group": "EXO", "img": "https://i.imgur.com/i3T0ncP.png" },
   {
     "idol": "Yeonjun",
     "group": "TxT",
-    "img": "https://i.imgur.com/FvYXwXZ.png"
+    "img": "https://i.imgur.com/AiYplM4.png"
   },
-  { "idol": "San", "group": "Ateez", "img": "https://i.imgur.com/XC5xtsR.png" }
+  {
+    "idol": "Soobin",
+    "group": "TxT",
+    "img": "https://i.imgur.com/zbiGFl0.png"
+  }
 ]

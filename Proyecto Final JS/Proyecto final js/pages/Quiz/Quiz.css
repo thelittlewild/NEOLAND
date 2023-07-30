@@ -1,8 +1,12 @@
 #idolImage {
-  height: 300px;
+  height: 400px;
   width: 300px;
 }
 
 #containerQuiz {
   display: none;
+}
+
+button.answer1 {
+  width: 300px;
 }

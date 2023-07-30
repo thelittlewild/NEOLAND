@@ -82,7 +82,6 @@ const newQuizQuestions = () => {
   randomAnswer = randomNumber(1, 3);
   const correctAnswer = document.getElementById("answer" + randomAnswer);
   correctAnswer.innerHTML = randomIdol.idol;
-  correctAnswer.style.backgroundColor = "blue";
   const imgIdol = document.getElementById("idolImage");
   imgIdol.src = randomIdol.img;
   const roundsText = document.getElementById("rounds");
