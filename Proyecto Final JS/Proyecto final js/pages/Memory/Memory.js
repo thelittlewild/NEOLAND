@@ -223,7 +223,7 @@ const shuffle = () => {
     card.style.order = randomPos;
   });
   addListeners(cards);
-  segundos = 10;
+  segundos = 40;
   intervalo = setInterval(time, 1000);
 };
 

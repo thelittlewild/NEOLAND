@@ -4,20 +4,20 @@ import { randomNumber } from "../../utils";
 
 const template = () => `
   <div id="quiz">
-    <button id="startQuiz">Start!</button>
+      <button id="startQuiz">Start!</button>
     <div id="finishMessage"></div>
+    <div id="Pregunta">¿Quién es este idol?</div>
     <div id="containerQuiz">
-      <div id="Pregunta">¿Quién es este idol?</div>
       <div id="containerImgRespuestas">
         <img
           id="idolImage"
-          src="https://i.imgur.com/i5qiIsD.png"
+          src="https://i.imgur.com/nkrzlYX.png"
           alt="idolImage"
         />
         <div id="answers">
-          <button id="answer1"  style="border: 2px solid #ccc;">Incorrecto</button>
-          <button id="answer2"  style="border: 2px solid #ccc;">Incorrecto</button>
-          <button id="answer3"  style="border: 2px solid #ccc;">Incorrecto</button>
+          <button id="answer1">?</button>
+          <button id="answer2">?</button>
+          <button id="answer3">?</button>
         </div>
       </div>
       <div id="Ronda">
@@ -93,9 +93,9 @@ const checkAnswer = (choosenAnswer) => {
     answer.setAttribute("disabled", true);
   }
   const choosenButton = document.getElementById("answer" + choosenAnswer);
-  choosenButton.style.backgroundColor = "red";
+  choosenButton.style.backgroundColor = "gray";
   const correctButton = document.getElementById("answer" + randomAnswer);
-  correctButton.style.backgroundColor = "green";
+  correctButton.style.backgroundColor = "#f4b9cd";
   const failsText = document.getElementById("fails");
   if (choosenAnswer != randomAnswer) ++fails;
   failsText.innerHTML = "Fallos " + fails;
@@ -108,7 +108,7 @@ const checkAnswer = (choosenAnswer) => {
     finishMessage.style.display = "flex";
     finishMessage.innerHTML = `Has llegado a la ronda ${
       rounds - 1
-    } Pulsa Start para intentarlo de nuevo`;
+    }! Pulsa Start para intentarlo de nuevo`;
   } else {
     setTimeout(() => {
       newQuizQuestions();
