@@ -3,10 +3,19 @@
 // Haz varios ejemplos y compruebalos.
 //Sugerencia de función:
 
-function findArrayIndex(array, text) {}
-
-const findArrayIndex = (arr, text) => {};
-
 //Ej array:
 
-["Caracol", "Mosquito", "Salamandra", "Ajolote"];
+const bichitos = ["Caracol", "Mosquito", "Salamandra", "Ajolote"];
+
+const findArrayIndex = (bichitos, text) => {
+  if (bichitos.includes(text)) {
+    bichitos.forEach((bichi, index) => {
+      if (bichi == text) {
+        console.log(`El bichito ${text} se encuentra en la posición ${index}`);
+      }
+    });
+  } else console.log(`El bichito ${text} no está en este jardín`);
+};
+
+findArrayIndex(bichitos, "Caracol");
+findArrayIndex(bichitos, "Mariposa");

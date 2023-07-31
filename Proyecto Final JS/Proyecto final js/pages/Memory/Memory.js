@@ -3,7 +3,7 @@ import JSConfetti from "js-confetti";
 
 const template = () => `
 
-<div="containerCards">
+<div id="containerCards">
 <div id="time"></div>  
 <section class="memory-game">
   

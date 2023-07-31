@@ -5,20 +5,19 @@
 }
 
 .memory-game {
-  width: 580px;
-  height: 580px;
+  width: 550px;
+  height: 550px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
 }
 
-.containerCards {
+#containerCards {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  position: fixed;
   margin: 1rem;
-  z-index: -1;
 }
 
 .memory-card {
@@ -68,12 +67,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  width: 100px;
 }
 
 .containerEnd {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  align-self: center;
-  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 #resetButton {
