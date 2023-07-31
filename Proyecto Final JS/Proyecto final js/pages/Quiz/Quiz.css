@@ -4,9 +4,14 @@
 }
 
 #containerQuiz {
-  display: none;
+  display: flex;
+  flex-direction: column;
 }
 
-button.answer1 {
+#startQuiz {
   width: 300px;
+}
+
+#answer1 {
+  background-color: aquamarine;
 }

@@ -15,9 +15,9 @@ const template = () => `
           alt="idolImage"
         />
         <div id="answers">
-          <button id="answer1">Incorrecto</button>
-          <button id="answer2">Incorrecto</button>
-          <button id="answer3">Incorrecto</button>
+          <button id="answer1"  style="border: 2px solid #ccc;">Incorrecto</button>
+          <button id="answer2"  style="border: 2px solid #ccc;">Incorrecto</button>
+          <button id="answer3"  style="border: 2px solid #ccc;">Incorrecto</button>
         </div>
       </div>
       <div id="Ronda">
@@ -71,7 +71,6 @@ const newQuizQuestions = () => {
     const randomIdol = unselectedIdols[randomPosition];
     unselectedIdols.splice(randomPosition, 1);
     const answer = document.getElementById("answer" + index);
-    console.log({ randomIdol });
     answer.innerHTML = randomIdol.idol;
     answer.style.backgroundColor = "white";
     answer.removeAttribute("disabled");
