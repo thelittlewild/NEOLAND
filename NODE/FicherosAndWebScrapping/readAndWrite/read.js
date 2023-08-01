@@ -7,7 +7,7 @@ fs.readFile("kdramas.json", (err, kdramas) => {
   } else {
     // Si obtenemos los datos y no un error, habrá que transformar
     // la información con JSON.parse() para poder mostrarla
-    const kdramasKdramas = JSON.parse(kdramas);
+    const parsedKdramas = JSON.parse(kdramas);
     console.log(parsedKdramas);
   }
 });

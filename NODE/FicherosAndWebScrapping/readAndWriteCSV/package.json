@@ -1,8 +1,8 @@
 {
-  "name": "1.readandwrite",
+  "name": "readandwritecsv",
   "version": "1.0.0",
-  "description": "aplicación que lee y escribe archivos json",
-  "main": "read.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "write": "node write.js",
     "read": "node read.js"
@@ -13,5 +13,8 @@
     "writeJson"
   ],
   "author": "thelittlewild",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0"
+  }
 }

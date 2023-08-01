@@ -32,8 +32,8 @@ const kdramas = [
   },
 ];
 
-const kdramaJson = JSON.stringify(kdramas);
+const kdramasJson = JSON.stringify(kdramas);
 
-fs.writeFile("kdrama.json", kdramaJson, () => {
+fs.writeFile("kdramas.json", kdramasJson, () => {
   console.log("json de doramas creado");
 });

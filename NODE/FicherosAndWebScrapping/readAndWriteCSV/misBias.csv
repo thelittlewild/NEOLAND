@@ -1,0 +1,3 @@
+fs.writeFile("misBias.csv", CSVtoFile, (error) => {
+  error ? console.log("existe un error ❌") : console.log("fichero creado 👌");
+});
