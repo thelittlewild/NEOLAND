@@ -4,6 +4,7 @@ import "./TresEnRaya.css";
 const template = () => `
   <div id="tresEnRaya">
     <div id="winnerIMG"></div>
+    <div id="winnerFinalMessage"><h1 id="winnerMessage"></h1></div>
     <div id="containerTresEnRaya">
       <div>
         <button id="inputCasilla1" class="tresRaya"><img src="https://i.imgur.com/pu6BPiv.png" id="imgCasilla1" /></button>
@@ -26,6 +27,7 @@ const template = () => `
   </div>
 `;
 
+// escuchadores para cada casilla (botón) según su posición:
 const addListeners = () => {
   const reset = document.getElementById("reset");
   reset.addEventListener("click", (e) => {
@@ -116,11 +118,13 @@ const IAsTurn = () => {
   ); //tachamos la posición que acabamos de ocupar
   winnerCheck[randomCasilla - 1] = -1;
 };
-
+// reseteo del juego, todas las imágenes vuelven a las iniciales y las ocupaciones de las casillas a 0:
 const resetGame = () => {
   const winnerIMG = document.getElementById("winnerIMG");
   winnerIMG.style.zIndex = -1;
   winnerIMG.innerHTML = "";
+  const winnerMessage = document.getElementById("winnerMessage");
+  winnerMessage.innerHTML = "";
 
   const imgCasilla1 = document.getElementById("imgCasilla1");
   imgCasilla1.src = "https://i.imgur.com/pu6BPiv.png";
@@ -143,7 +147,7 @@ const resetGame = () => {
   validPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   winnerCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 };
-
+// comprobador si gana alguien:
 const whoWins = () => {
   const filaSuperior = winnerCheck[0] + winnerCheck[1] + winnerCheck[2];
   const filaCentral = winnerCheck[3] + winnerCheck[4] + winnerCheck[5];
@@ -154,6 +158,7 @@ const whoWins = () => {
   const primeraDiagonal = winnerCheck[0] + winnerCheck[4] + winnerCheck[8];
   const segundaDiagonal = winnerCheck[2] + winnerCheck[4] + winnerCheck[6];
   const winnerIMG = document.getElementById("winnerIMG");
+  const winnerMessage = document.getElementById("winnerMessage");
   if (
     filaSuperior === -3 ||
     filaCentral === -3 ||
@@ -165,9 +170,11 @@ const whoWins = () => {
     segundaDiagonal === -3
   ) {
     winnerIMG.style.zIndex = 10;
+    winnerMessage.style.zIndex = 15;
 
     winnerIMG.innerHTML =
       '<img src="https://thumbs.gfycat.com/BelatedFreshBetafish-size_restricted.gif"/>';
+    winnerMessage.innerHTML = '<h1 id="winnerMessage">Kero wins! 🐱</h1>';
     return "IA";
   }
   if (
@@ -181,13 +188,17 @@ const whoWins = () => {
     segundaDiagonal === 3
   ) {
     winnerIMG.style.zIndex = 10;
+    winnerMessage.style.zIndex = 15;
     winnerIMG.innerHTML =
       '<img src="https://gifdb.com/images/high/anime-cardcaptor-sakura-blushing-phccynajy3yf5u9o.gif"/>';
+    winnerMessage.innerHTML = '<h1 id="winnerMessage">Sakura wins! 🌸</h1>';
     return "P1";
   }
   if (validPositions.length === 0) {
     winnerIMG.style.zIndex = 10;
+    winnerMessage.style.zIndex = 15;
     winnerIMG.innerHTML = '<img src="https://i.gifer.com/2uyx.gif"/>';
+    winnerMessage.innerHTML = '<h1 id="winnerMessage">Nobody wins! 💢</h1>';
     return "Empate";
   }
   return "Nadie";
