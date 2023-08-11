@@ -13,7 +13,11 @@ const SkinSchema = new Schema(
       require: true,
     },
     splashArt: { type: String, require: true }, //IMG
-    //userFav
+    userFav: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
     //championSkin
     tematica: {
       type: String,
@@ -30,7 +34,6 @@ const SkinSchema = new Schema(
         "Domador de Dragones",
         "Matadragones",
         "KDA",
-        "",
       ],
     },
   },

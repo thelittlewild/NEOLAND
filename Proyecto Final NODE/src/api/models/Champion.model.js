@@ -38,7 +38,11 @@ const ChampionSchema = new Schema(
       require: true,
     },
     skins: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skin" }],
-    //userFav:
+    userFav: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    },
   },
   {
     timestamps: true,
