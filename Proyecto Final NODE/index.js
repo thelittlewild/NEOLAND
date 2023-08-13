@@ -23,8 +23,12 @@ app.use(express.urlencoded({ limit: "5mb", extended: false }));
 
 // ROUTES------------
 const UserRoutes = require("./src/api/routes/user.routes");
+const ChampionRoutes = require("./src/api/routes/Champion.routes");
+const SkinRoutes = require("./src/api/routes/Skin.routes");
 
 app.use("/api/v1/users", UserRoutes);
+app.use("/api/v1/champions", ChampionRoutes);
+app.use("/api/v1/skins", SkinRoutes);
 
 //Cuando no se mete ninguna ruta:
 app.use("*", (req, res, next) => {

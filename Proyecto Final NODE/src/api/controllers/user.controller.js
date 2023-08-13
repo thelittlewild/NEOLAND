@@ -7,8 +7,12 @@ const User = require("../models/user.model");
 const nodemailer = require("nodemailer");
 const { generateToken } = require("../../utils/token");
 const randomPassword = require("../../utils/randomPassword");
+const Champion = require("../models/Champion.model");
+const Skin = require("../models/Skin.model");
 
-//! ------------------------- REGISTER------------------
+//?-----------------------------------------------------
+//?------------------- REGISTER---------------------------
+//?-----------------------------------------------------
 const registerSlow = async (req, res, next) => {
   let catchImg = req.file?.path;
   try {
@@ -93,7 +97,9 @@ const registerSlow = async (req, res, next) => {
   }
 };
 
-//? ---------------------- CONFIRMATION NEW USER-----------------
+//?-----------------------------------------------------
+//?-------------- CONFIRMATION NEW USER-----------------
+//?-----------------------------------------------------
 
 const checkNewUser = async (req, res, next) => {
   try {
@@ -145,7 +151,9 @@ const checkNewUser = async (req, res, next) => {
   }
 };
 
-//! ------------------ RESEND CODE CONFIRMATION -----------------
+//?-----------------------------------------------------
+//?---------------- RESEND CODE CONFIRMATION------------
+//?-----------------------------------------------------
 
 const resendCode = async (req, res, next) => {
   try {
@@ -188,7 +196,9 @@ const resendCode = async (req, res, next) => {
   }
 };
 
-//? -------------------- LOGIN ------------------------
+//?----------------------------------------------------
+//?------------------- LOGIN---------------------------
+//?----------------------------------------------------
 
 const login = async (req, res, next) => {
   try {
@@ -216,8 +226,9 @@ const login = async (req, res, next) => {
     return next(error);
   }
 };
-
-//?----------------- AUTOLOGIN --------------------------
+//?-----------------------------------------------------
+//?------------------- AUTOLOGIN------------------------
+//?-----------------------------------------------------
 
 const autoLogin = async (req, res, next) => {
   try {
@@ -242,7 +253,9 @@ const autoLogin = async (req, res, next) => {
   }
 };
 
-//! ---------------- CAMBIO CONTRASEÑA -------------------------
+//?-----------------------------------------------------
+//?------------CAMBIO CONTRASEÑA CREATE-----------------
+//?-----------------------------------------------------
 
 //? ----------------- ANTES DE ESTAR LOGGEADO ---------------------
 const changePassword = async (req, res, next) => {
@@ -365,7 +378,9 @@ const modifyPassword = async (req, res, next) => {
   }
 };
 
-//! ---------------------- UPDATE --------------------
+//?-----------------------------------------------------
+//?------------------- UPDATE---------------------------
+//?-----------------------------------------------------
 
 const update = async (req, res, next) => {
   // guardamos la imagen para si luego hay un error utilizar la URL para borrarla
@@ -441,7 +456,9 @@ const update = async (req, res, next) => {
   }
 };
 
-//! --------------------- DELETE -----------------------
+//?-----------------------------------------------------
+//?------------------- DELETE---------------------------
+//?-----------------------------------------------------
 
 const deleteUser = async (req, res, next) => {
   try {
@@ -458,7 +475,149 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-//------------ CONTROLES RUTAS:
+//?-----------------------------------------------------
+//?------------------- FavChamps -----------------------
+//?-----------------------------------------------------
+
+const toggleFavChampion = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const { champions } = req.body;
+    const arrayChampions = champions.split(",");
+    arrayChampions.forEach(async (element) => {
+      if (req.user.championFav.includes(element)) {
+        // si lo incluye lo sacamos
+        try {
+          await User.findByIdAndUpdate(_id, {
+            $pull: { championFav: element },
+          });
+
+          try {
+            await Champion.findByIdAndUpdate(element, {
+              $pull: { usersFav: _id },
+            });
+          } catch (error) {
+            return res.status(404).json({
+              error: "error updating pull id User in model Champion",
+              message: error.message,
+            });
+          }
+        } catch (error) {
+          return res.status(404).json({
+            error: "error updating pull Champion",
+            element,
+            message: error.message,
+          });
+        }
+      } else {
+        // si no lo incluye lo metemos
+        try {
+          await User.findByIdAndUpdate(_id, {
+            $push: { championsFav: element },
+          });
+          try {
+            await Champion.findByIdAndUpdate(element, {
+              $push: { usersFav: _id },
+            });
+          } catch (error) {
+            return res.status(404).json({
+              error: "error updating push id User in model Champion",
+              message: error.message,
+            });
+          }
+        } catch (error) {
+          return res.status(404).json({
+            error: "error updating push Champion",
+            element,
+            message: error.message,
+          });
+        }
+      }
+    });
+
+    setTimeout(async () => {
+      return res
+        .status(200)
+        .json(await User.findById(_id).populate("championsFav"));
+    }, 100);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//?-----------------------------------------------------
+//?------------------- FavSkins ------------------------
+//?-----------------------------------------------------
+
+const toggleFavSkin = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const { skins } = req.body;
+    const arraySkins = skins.split(",");
+    arraySkins.forEach(async (element) => {
+      if (req.user.skinsFav.includes(element)) {
+        // si lo incluye lo sacamos
+        try {
+          await User.findByIdAndUpdate(_id, {
+            $pull: { skinsFav: element },
+          });
+
+          try {
+            await Skin.findByIdAndUpdate(element, {
+              $pull: { usersFav: _id },
+            });
+          } catch (error) {
+            return res.status(404).json({
+              error: "error updating pull id User in model skin",
+              message: error.message,
+            });
+          }
+        } catch (error) {
+          return res.status(404).json({
+            error: "error updating pull skin",
+            element,
+            message: error.message,
+          });
+        }
+      } else {
+        // si no lo incluye lo metemos
+        try {
+          await User.findByIdAndUpdate(_id, {
+            $push: { skinsFav: element },
+          });
+          try {
+            await Skin.findByIdAndUpdate(element, {
+              $push: { usersFav: _id },
+            });
+          } catch (error) {
+            return res.status(404).json({
+              error: "error updating push id User in model skin",
+              message: error.message,
+            });
+          }
+        } catch (error) {
+          return res.status(404).json({
+            error: "error updating push skin",
+            element,
+            message: error.message,
+          });
+        }
+      }
+    });
+
+    setTimeout(async () => {
+      return res
+        .status(200)
+        .json(await User.findById(_id).populate("skinsFav"));
+    }, 100);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//?-----------------------------------------------------
+//?------------------- CONTROLES RUTAS -----------------
+//?-----------------------------------------------------
 
 module.exports = {
   autoLogin,
@@ -471,4 +630,6 @@ module.exports = {
   update,
   deleteUser,
   checkNewUser,
+  toggleFavChampion,
+  toggleFavSkin,
 };

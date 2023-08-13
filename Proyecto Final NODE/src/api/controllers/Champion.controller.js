@@ -1,6 +1,4 @@
-const {
-  deleteImgCloudinary,
-} = require("../../../../NODE/MiniProyecto0307/src/middleware/files.middleware");
+const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const Champion = require("../models/Champion.model");
 const Skin = require("../models/Skin.model");
 const User = require("../models/user.model");
@@ -23,7 +21,7 @@ const createChampion = async (req, res, next) => {
 
     const savedChampion = await newChampion.save();
 
-    if (savedChampion) {
+    if (!savedChampion) {
       return res
         .status(404)
         .json("No se ha podido guardar el campeón en la base de datos");
@@ -38,7 +36,7 @@ const createChampion = async (req, res, next) => {
 //?------------------- GetById---------------------------
 //?------------------------------------------------------
 
-const getById = async (req, res, next) => {
+const getChampionById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const championById = await Champion.findById(id);
@@ -56,7 +54,7 @@ const getById = async (req, res, next) => {
 //?------------------- GetAll--------------------------
 //?----------------------------------------------------
 
-const getAll = async (req, res, next) => {
+const getAllChampion = async (req, res, next) => {
   try {
     const championAll = await Champion.find();
 
@@ -74,7 +72,7 @@ const getAll = async (req, res, next) => {
 //?------------------- GetByName--------------------------
 //?-------------------------------------------------------
 
-const getByName = async (req, res, next) => {
+const getChampionByName = async (req, res, next) => {
   try {
     const { name } = req.query;
     const championByName = await Champion.find({ name });
@@ -93,13 +91,32 @@ const getByName = async (req, res, next) => {
 //?------------------- GetByRol--------------------------
 //?------------------------------------------------------
 
-const getByRol = async (req, res, next) => {
+const getChampionByRol = async (req, res, next) => {
   try {
     const { rol } = req.query;
     const championByRol = await Champion.find({ rol });
 
     if (championByRol.length > 0) {
       return res.status(200).json({ data: championByRol });
+    } else {
+      res.status(404).json("champion not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//?------------------------------------------------------
+//?------------------- GetByRegion-----------------------
+//?------------------------------------------------------
+
+const getChampionByRegion = async (req, res, next) => {
+  try {
+    const { region } = req.query;
+    const championByRegion = await Champion.find({ region });
+
+    if (championByRegion.length > 0) {
+      return res.status(200).json({ data: championByRegion });
     } else {
       res.status(404).json("champion not found");
     }
@@ -125,6 +142,8 @@ const updateChampion = async (req, res, next) => {
         image: req.file?.path ? req.file?.path : championById.image,
         gender: req.body?.gender ? req.body?.gender : championById.gender,
         name: req.body?.name ? req.body?.name : championById.name,
+        region: req.body?.region ? req.body?.region : championById.region,
+        rol: req.body?.rol ? req.body?.rol : championById.rol,
       };
       await Champion.findByIdAndUpdate(id, customBody);
       if (req.file?.path) {
@@ -170,6 +189,80 @@ const updateChampion = async (req, res, next) => {
 };
 
 //?----------------------------------------------------
+//?-------------------Add & Delete Skin----------------
+//?----------------------------------------------------
+
+const addSkin = async (req, res, next) => {
+  try {
+    let arraySkins;
+    const { id } = req.params;
+    const { skins } = req.body;
+
+    const championById = await Champion.findById(id);
+    let updateChampion;
+    //let updateChampion = [];
+    if (championById) {
+      arraySkins = skins.split(",");
+      arraySkins.forEach(async (element) => {
+        if (championById.skins.includes(element)) {
+          try {
+            await Champion.findByIdAndUpdate(id, {
+              $pull: { skins: element },
+            });
+            updateChampion = await Champion.findById(id);
+            try {
+              await Skin.findByIdAndUpdate(element, {
+                $pull: { champions: id },
+              });
+
+              const updateSkin = await Skin.findById(element);
+              //updateSkin.push(updateSkin);
+            } catch (error) {
+              return res.status(404).json(error);
+            }
+          } catch (error) {
+            return res.status(404).json(error);
+          }
+        } else {
+          try {
+            await Champion.findByIdAndUpdate(id, {
+              $push: { skins: element },
+            });
+            updateChampion = await Champion.findById(id);
+            try {
+              await Skin.findByIdAndUpdate(element, {
+                $push: { champions: id },
+              });
+              const updateSkin = await Skin.findById(element);
+              //updateSkin.push(updateSkin);
+            } catch (error) {
+              return res.status(404).json(error);
+            }
+          } catch (error) {
+            return res.status(404).json(error);
+          }
+        }
+      });
+
+      setTimeout(async () => {
+        return res.status(200).json({
+          update: await Champion.findById(id).populate({
+            path: "skins",
+            populate: {
+              path: "champions",
+            },
+          }),
+        });
+      }, 500);
+    } else {
+      return res.status(404).json("champion not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//?----------------------------------------------------
 //?------------------- Delete--------------------------
 //?----------------------------------------------------
 
@@ -197,7 +290,7 @@ const deleteChampion = async (req, res, next) => {
           } else {
             return res.status(404).json({
               message: "error updating User model",
-              skins: championDelete.movies,
+              skins: championDelete.champions,
               userFav: championDelete.userFav,
               idChampionDelete: id,
             });
@@ -253,11 +346,13 @@ const errorsSolve = async (req, res, next) => {
 
 module.exports = {
   createChampion,
-  getById,
-  getAll,
-  getByName,
-  getByRol,
+  getChampionById,
+  getAllChampion,
+  getChampionByName,
+  getChampionByRol,
+  getChampionByRegion,
   updateChampion,
   deleteChampion,
   errorsSolve,
+  addSkin,
 };

@@ -11,6 +11,8 @@ const {
   update,
   deleteUser,
   checkNewUser,
+  toggleFavChampion,
+  toggleFavSkin,
 } = require("../controllers/user.controller");
 
 const express = require("express");
@@ -26,6 +28,11 @@ UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
 UserRoutes.patch("/update/update", [isAuth], upload.single("image"), update);
 UserRoutes.delete("/", [isAuth], deleteUser);
 UserRoutes.post("/check", checkNewUser);
-//!---------------- REDIRECT-------------------------------
+UserRoutes.patch("/championfav", toggleFavChampion);
+UserRoutes.patch("/skinfav", toggleFavSkin);
+//UserRoutes.patch("/favorites/:id", )
+
+//?------------------- REDIRECT-------------------------
+
 UserRoutes.patch("/sendPassword/:id", sendPassword);
 module.exports = UserRoutes;

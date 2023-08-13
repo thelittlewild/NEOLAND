@@ -9,17 +9,22 @@ const SkinSchema = new Schema(
     name: { type: String, unique: true, require: true },
     tier: {
       type: String,
-      enum: ["Legado", "Definitiva", "Legendaria", "Épica", "Rara"],
+      enum: ["Normal", "Legado", "Definitiva", "Legendaria", "Épica", "Rara"],
       require: true,
     },
     splashArt: { type: String, require: true }, //IMG
-    userFav: {
+    usersFav: [
+      {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "User",
+        default: [],
+      },
+    ],
+    champion: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "User",
-      default: [],
+      ref: "Champion",
     },
-    //championSkin
-    tematica: {
+    theme: {
       type: String,
       enum: [
         "Guardianas de las Estrellas",

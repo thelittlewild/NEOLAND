@@ -40,6 +40,20 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    championsFav: [
+      {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Champion",
+        default: [],
+      },
+    ],
+    skinsFav: [
+      {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Skin",
+        default: [],
+      },
+    ],
   },
   {
     timestamps: true,
