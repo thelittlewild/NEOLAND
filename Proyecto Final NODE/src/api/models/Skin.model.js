@@ -13,7 +13,7 @@ const SkinSchema = new Schema(
       require: true,
     },
     splashArt: { type: String, require: true }, //IMG
-    usersFav: [
+    userFav: [
       {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "User",

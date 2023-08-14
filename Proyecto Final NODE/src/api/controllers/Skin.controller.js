@@ -1,6 +1,6 @@
 const {
   deleteImgCloudinary,
-} = require("../../../../NODE/MiniProyecto0307/src/middleware/files.middleware");
+} = require("../../../../Proyecto Final NODE/src/middleware/files.middleware");
 const Champion = require("../models/Champion.model");
 const Skin = require("../models/Skin.model");
 const User = require("../models/user.model");
@@ -22,11 +22,12 @@ const createSkin = async (req, res, next) => {
     }
     const savedSkin = await newSkin.save();
 
-    if (savedSkin) {
+    if (!savedSkin) {
       return res
         .status(404)
         .json("No se ha podido guardar la skin en la base de datos");
     }
+    return res.status(200).json({ data: savedSkin });
   } catch (error) {
     req.file?.path && deleteImgCloudinary(catchImage);
     return next(error);
@@ -76,7 +77,7 @@ const getAllSkin = async (req, res, next) => {
 const getSkinByName = async (req, res, next) => {
   try {
     const { name } = req.query;
-    const skinByName = await Skin.find({ name });
+    const skinByName = await Skin.find({ name: name });
 
     if (skinByName.length > 0) {
       return res.status(200).json({ data: skinByName });
@@ -141,8 +142,11 @@ const updateSkin = async (req, res, next) => {
       const customBody = {
         _id: skinById._id,
         image: req.file?.path ? req.file?.path : skinById.image,
-        gender: req.body?.gender ? req.body?.gender : skinById.gender,
-        name: req.body?.name ? req.body?.name : skinById.name,
+        tier: req.body?.tier ? req.body?.tier : skinById.tier,
+        splashArt: req.body?.splashArt
+          ? req.body?.splashArt
+          : skinById.splashArt,
+        theme: req.body?.theme ? req.body?.theme : skinById.theme,
       };
       await Skin.findByIdAndUpdate(id, customBody);
       if (req.file?.path) {

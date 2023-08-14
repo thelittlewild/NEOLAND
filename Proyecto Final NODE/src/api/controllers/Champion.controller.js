@@ -26,6 +26,7 @@ const createChampion = async (req, res, next) => {
         .status(404)
         .json("No se ha podido guardar el campeón en la base de datos");
     }
+    return res.status(200).json({ data: savedChampion });
   } catch (error) {
     req.file?.path && deleteImgCloudinary(catchImage);
     return next(error);
@@ -235,6 +236,7 @@ const addSkin = async (req, res, next) => {
               });
               const updateSkin = await Skin.findById(element);
               //updateSkin.push(updateSkin);
+              return res.status(200).json({ data: updateSkin });
             } catch (error) {
               return res.status(404).json(error);
             }
@@ -269,8 +271,8 @@ const addSkin = async (req, res, next) => {
 const deleteChampion = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const championDelete = await Champion.findByIdAndDelete(id);
     try {
+      const championDelete = await Champion.findByIdAndDelete(id);
       const test = await Skin.updateMany(
         { champions: id },
         { $pull: { champions: id } }

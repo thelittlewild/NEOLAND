@@ -38,7 +38,7 @@ const ChampionSchema = new Schema(
       require: true,
     },
     skins: [{ type: mongoose.Schema.Types.ObjectId, ref: "Skin" }],
-    usersFav: [
+    userFav: [
       {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "User",
