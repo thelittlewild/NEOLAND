@@ -11,6 +11,10 @@ const User = require("../models/user.model");
 
 const createSkin = async (req, res, next) => {
   let catchImage = req.file?.path;
+  const { rol } = req.user;
+  if (rol !== "admin") {
+    return res.status(403).json("No permission");
+  }
   try {
     await Skin.syncIndexes();
     const newSkin = new Skin(req.body);
@@ -127,12 +131,56 @@ const getSkinByTheme = async (req, res, next) => {
   }
 };
 
+//?------------------------------------------------------
+//?-----------------Popular Skins--------------------
+//?------------------------------------------------------
+
+const getTopPopularSkins = async (req, res, next) => {
+  try {
+    const skins = await Skin.find();
+    skins.sort((a, b) => b.userFav.length - a.userFav.length);
+    const top10fav = skins.slice(0, 10);
+    return res.status(200).json(top10fav);
+  } catch (error) {
+    return res
+      .status(400)
+      .json("error al mostrar el top 10 Skins más populares");
+  }
+};
+
+//?----------------------------------------------------
+//?------------------Greatest Themes-------------------
+//?----------------------------------------------------
+
+const greatestThemes = async (req, res, next) => {
+  const skins = await Skin.find({ id: req.params.id });
+  const conteo = skins.reduce((curr, acc) => {
+    if (acc[curr.theme]) acc[curr.theme]++;
+    else acc[curr.theme] = 1;
+  }, {});
+  const arrConteo = Object.keys(conteo).map((key) => ({
+    key,
+    recuento: conteo[key],
+  }));
+  try {
+    arrConteo.sort((a, b) => b.recuento - a.recuento);
+    const top10Themes = arrConteo.slice(0, 1);
+    return res.status(200).json(top10Themes);
+  } catch (error) {
+    return res.status(400).json("error al mostrar el Top 10 de temáticas");
+  }
+};
+
 //?----------------------------------------------------
 //?------------------- Update--------------------------
 //?----------------------------------------------------
 
 const updateSkin = async (req, res, next) => {
   let catchImage = req.file?.path;
+  const { rol } = req.user;
+  if (rol !== "admin") {
+    return res.status(403).json("No permission");
+  }
   try {
     const { id } = req.params;
 
@@ -200,6 +248,10 @@ const addChampion = async (req, res, next) => {
     let arrayChampions;
     const { id } = req.params;
     const { champions } = req.body;
+    const { rol } = req.user;
+    if (rol !== "admin") {
+      return res.status(403).json("No permission");
+    }
 
     const skinById = await Skin.findById(id);
     let updateSkin;
@@ -270,6 +322,10 @@ const addChampion = async (req, res, next) => {
 //?----------------------------------------------------
 
 const deleteSkin = async (req, res, next) => {
+  const { rol } = req.user;
+  if (rol !== "admin") {
+    return res.status(403).json("No permission");
+  }
   try {
     const { id } = req.params;
     const skinDelete = await Skin.findByIdAndDelete(id);
@@ -355,4 +411,6 @@ module.exports = {
   addChampion,
   getSkinByTier,
   getSkinByTheme,
+  getTopPopularSkins,
+  greatestThemes,
 };

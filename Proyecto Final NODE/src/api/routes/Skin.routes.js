@@ -8,6 +8,7 @@ const {
   addChampion,
   getSkinByTheme,
   getSkinByTier,
+  greatestThemes,
 } = require("../controllers/Skin.controller");
 
 const Skin = require("../models/Skin.model");
@@ -23,5 +24,6 @@ SkinRoutes.get("/byTheme", getSkinByTheme);
 SkinRoutes.patch("/:id", updateSkin);
 SkinRoutes.delete("/:id", deleteSkin);
 SkinRoutes.put("/:id", addChampion);
+SkinRoutes.get("/greatestThemes", greatestThemes);
 
 module.exports = SkinRoutes;

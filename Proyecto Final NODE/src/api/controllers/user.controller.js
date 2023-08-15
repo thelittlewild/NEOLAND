@@ -9,6 +9,7 @@ const { generateToken } = require("../../utils/token");
 const randomPassword = require("../../utils/randomPassword");
 const Champion = require("../models/Champion.model");
 const Skin = require("../models/Skin.model");
+const { patch } = require("../routes/user.routes");
 
 //?-----------------------------------------------------
 //?------------------- REGISTER---------------------------
@@ -385,6 +386,11 @@ const modifyPassword = async (req, res, next) => {
 const update = async (req, res, next) => {
   // guardamos la imagen para si luego hay un error utilizar la URL para borrarla
   let catchImg = req.file?.path;
+  const { _id, rol } = req.user;
+  const { id } = req.body;
+  if (rol !== "admin" && id !== _id) {
+    return res.status(403).json("No permission");
+  }
   try {
     // creamos una nueva instancia del modelo User con el req.body
     const patchUser = new User(req.body);
@@ -393,11 +399,13 @@ const update = async (req, res, next) => {
       patchUser.image = req.file.path;
     }
     // importante quedarnos con el id del usuario antes de actualizarse
-    patchUser._id = req.user._id;
+    patchUser._id = req.params.id;
     // LA CONTRASEÑA NO SE PUEDE MODIFICAR: ponemos la contraseña de la db
     patchUser.password = req.user.password;
     // Lo mismo con el rol, confirmationCode, check, NO SE PUEDE MODIFICAR POR AQUI
-    patchUser.rol = req.user.rol;
+    if (rol === "admin") {
+      patchUser.rol = req.user.rol;
+    }
     patchUser.confirmationCode = req.user.confirmationCode;
     patchUser.check = req.user.check;
     patchUser.email = req.user.email;
@@ -405,7 +413,7 @@ const update = async (req, res, next) => {
     // Ahora cogemos y actualizamos el usuario
 
     try {
-      await User.findByIdAndUpdate(req.user._id, patchUser);
+      await User.findByIdAndUpdate(patchUser._id, patchUser);
       if (req.file) {
         deleteImgCloudinary(req.user.image);
       }
@@ -462,8 +470,16 @@ const update = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    const { _id, image } = req.user;
-    await User.findByIdAndDelete(_id);
+    const { _id, rol } = req.user;
+    const { id } = req.body;
+    if (rol !== "admin" && id !== _id) {
+      return res.status(403).json("No permission");
+    }
+    const userAdmin = await User.find({ rol: "admin" });
+    if (userAdmin.length == 1) {
+      return res.status(412).json("Can't remove all admin");
+    }
+    const { image } = await User.findByIdAndDelete(_id);
     if (await User.findById(_id)) {
       return res.status(404).json("Don't delete");
     } else {
@@ -615,6 +631,65 @@ const toggleFavSkin = async (req, res, next) => {
   }
 };
 
+//?------------------------------------------------------
+//?------------------Top Skin Owners---------------------
+//?------------------------------------------------------
+
+const userTopSkinOwner = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    users.sort((a, b) => b.skinsFav.length - a.skinsFav.length);
+    const top10SkinOwner = users.slice(0, 10);
+    return res.status(200).json(top10SkinOwner);
+  } catch (error) {
+    return res
+      .status(400)
+      .json("error al mostrar el top 10 Jugadores con más skins");
+  }
+};
+
+//?----------------------------------------------------
+//?-----------------Guess User's Rol-------------------
+//?----------------------------------------------------
+
+const guessUserRol = async (req, res, next) => {
+  const users = await User.find({ id: req.params.id });
+  const conteo = [
+    {
+      key: "Tirador",
+      recuento: users.championsFav.filter((c) => c.rol === "Tirador").length,
+    },
+    {
+      key: "Mago",
+      recuento: users.championsFav.filter((c) => c.rol === "Mago").length,
+    },
+    {
+      key: "Tanque",
+      recuento: users.championsFav.filter((c) => c.rol === "Tanque").length,
+    },
+    {
+      key: "Asesino",
+      recuento: users.championsFav.filter((c) => c.rol === "Asesino").length,
+    },
+    {
+      key: "Luchador",
+      recuento: users.championsFav.filter((c) => c.rol === "Luchador").length,
+    },
+    {
+      key: "Support",
+      recuento: users.championsFav.filter((c) => c.rol === "Support").length,
+    },
+  ];
+
+  try {
+    conteo.sort((a, b) => b.recuento - a.recuento);
+    const mostPlayedRol = conteo.slice(0, 1);
+    return res.status(200).json(mostPlayedRol);
+  } catch (error) {
+    return res.status(400).json("error al mostrar el main rol del jugador");
+  }
+};
+
 //?-----------------------------------------------------
 //?------------------- CONTROLES RUTAS -----------------
 //?-----------------------------------------------------
@@ -632,4 +707,6 @@ module.exports = {
   checkNewUser,
   toggleFavChampion,
   toggleFavSkin,
+  guessUserRol,
+  userTopSkinOwner,
 };

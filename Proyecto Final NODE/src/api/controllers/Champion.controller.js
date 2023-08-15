@@ -8,6 +8,10 @@ const User = require("../models/user.model");
 //?-----------------------------------------------------
 
 const createChampion = async (req, res, next) => {
+  const { rol } = req.user;
+  if (rol !== "admin") {
+    return res.status(403).json("No permission");
+  }
   let catchImage = req.file?.path;
   try {
     await Champion.syncIndexes();
@@ -126,14 +130,56 @@ const getChampionByRegion = async (req, res, next) => {
   }
 };
 
+//?------------------------------------------------------
+//?-----------------Popular Champions--------------------
+//?------------------------------------------------------
+
+const getTopPopularChamps = async (req, res, next) => {
+  try {
+    const champions = await Champion.find();
+    champions.sort((a, b) => b.userFav.length - a.userFav.length);
+    const top10fav = champions.slice(0, 10);
+    return res.status(200).json(top10fav);
+  } catch (error) {
+    return res
+      .status(400)
+      .json("error al mostrar el top 10 Campeones más populares");
+  }
+};
+
+//?------------------------------------------------------
+//?-------------Champions with most Skins----------------
+//?------------------------------------------------------
+
+const getTopChampsWithSkins = async (req, res, next) => {
+  try {
+    const champions = await Champion.find();
+    champions.sort((a, b) => b.skins.length - a.skins.length);
+    const top10ChampsWithSkins = champions.slice(0, 10);
+    return res.status(200).json(top10ChampsWithSkins);
+  } catch (error) {
+    return res
+      .status(400)
+      .json("error al mostrar el top 10 Campeones con más skins");
+  }
+};
+
 //?----------------------------------------------------
 //?------------------- Update--------------------------
 //?----------------------------------------------------
 
 const updateChampion = async (req, res, next) => {
+  const { rol } = req.user;
+  if (rol !== "admin") {
+    return res.status(403).json("No permission");
+  }
   let catchImage = req.file?.path;
   try {
     const { id } = req.params;
+    const { rol } = req.user;
+    if (rol !== "admin") {
+      return res.status(403).json("No permission");
+    }
 
     const championById = await Champion.findById(id);
     if (championById) {
@@ -195,6 +241,10 @@ const updateChampion = async (req, res, next) => {
 
 const addSkin = async (req, res, next) => {
   try {
+    const { rol } = req.user;
+    if (rol !== "admin") {
+      return res.status(403).json("No permission");
+    }
     let arraySkins;
     const { id } = req.params;
     const { skins } = req.body;
@@ -270,6 +320,10 @@ const addSkin = async (req, res, next) => {
 
 const deleteChampion = async (req, res, next) => {
   try {
+    const { rol } = req.user;
+    if (rol !== "admin") {
+      return res.status(403).json("No permission");
+    }
     const { id } = req.params;
     try {
       const championDelete = await Champion.findByIdAndDelete(id);
@@ -357,4 +411,6 @@ module.exports = {
   deleteChampion,
   errorsSolve,
   addSkin,
+  getTopPopularChamps,
+  getTopChampsWithSkins,
 };

@@ -13,6 +13,8 @@ const {
   checkNewUser,
   toggleFavChampion,
   toggleFavSkin,
+  guessUserRol,
+  userTopSkinOwner,
 } = require("../controllers/user.controller");
 
 const express = require("express");
@@ -25,12 +27,13 @@ UserRoutes.patch("/forgotpassword/forgotpassword", changePassword);
 UserRoutes.post("/login", login);
 UserRoutes.post("/login/autologin", autoLogin);
 UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
-UserRoutes.patch("/update/update", [isAuth], upload.single("image"), update);
-UserRoutes.delete("/", [isAuth], deleteUser);
+UserRoutes.patch("/update/:id", [isAuth], upload.single("image"), update);
+UserRoutes.delete("/:id", [isAuth], deleteUser);
 UserRoutes.post("/check", checkNewUser);
 UserRoutes.patch("/championfav", toggleFavChampion);
 UserRoutes.patch("/skinfav", toggleFavSkin);
-//UserRoutes.patch("/favorites/:id", )
+UserRoutes.get("/guessUserRol/:id", guessUserRol);
+UserRoutes.get("/topSkinOwners", userTopSkinOwner);
 
 //?------------------- REDIRECT-------------------------
 
