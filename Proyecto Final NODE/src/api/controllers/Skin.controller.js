@@ -1,41 +1,39 @@
 const {
-  deleteImgCloudinary,
-} = require("../../../../Proyecto Final NODE/src/middleware/files.middleware");
-const Champion = require("../models/Champion.model");
-const Skin = require("../models/Skin.model");
-const User = require("../models/user.model");
+	deleteImgCloudinary,
+} = require('../../../../Proyecto Final NODE/src/middleware/files.middleware');
+const Champion = require('../models/Champion.model');
+const Skin = require('../models/Skin.model');
+const User = require('../models/user.model');
 
 //?-----------------------------------------------------
 //?------------------- CREATE---------------------------
 //?-----------------------------------------------------
 
 const createSkin = async (req, res, next) => {
-  let catchImage = req.file?.path;
-  const { rol } = req.user;
-  if (rol !== "admin") {
-    return res.status(403).json("No permission");
-  }
-  try {
-    await Skin.syncIndexes();
-    const newSkin = new Skin(req.body);
-    if (req.file) {
-      newSkin.image = catchImage;
-    } else {
-      newSkin.image =
-        "https://res.cloudinary.com/drt000pht/image/upload/v1691743666/6804159_wt6dcz.png";
-    }
-    const savedSkin = await newSkin.save();
+	let catchImage = req.file?.path;
+	const { rol } = req.user;
+	if (rol !== 'admin') {
+		return res.status(403).json('No permission');
+	}
+	try {
+		await Skin.syncIndexes();
+		const newSkin = new Skin(req.body);
+		if (req.file) {
+			newSkin.image = catchImage;
+		} else {
+			newSkin.image =
+				'https://res.cloudinary.com/drt000pht/image/upload/v1691743666/6804159_wt6dcz.png';
+		}
+		const savedSkin = await newSkin.save();
 
-    if (!savedSkin) {
-      return res
-        .status(404)
-        .json("No se ha podido guardar la skin en la base de datos");
-    }
-    return res.status(200).json({ data: savedSkin });
-  } catch (error) {
-    req.file?.path && deleteImgCloudinary(catchImage);
-    return next(error);
-  }
+		if (!savedSkin) {
+			return res.status(404).json('No se ha podido guardar la skin en la base de datos');
+		}
+		return res.status(200).json({ data: savedSkin });
+	} catch (error) {
+		req.file?.path && deleteImgCloudinary(catchImage);
+		return next(error);
+	}
 };
 
 //?------------------------------------------------------
@@ -43,17 +41,17 @@ const createSkin = async (req, res, next) => {
 //?------------------------------------------------------
 
 const getSkinById = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const skinById = await Skin.findById(id);
-    if (skinById) {
-      return res.status(200).json({ data: skinById });
-    } else {
-      res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+	try {
+		const { id } = req.params;
+		const skinById = await Skin.findById(id);
+		if (skinById) {
+			return res.status(200).json({ data: skinById });
+		} else {
+			res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?----------------------------------------------------
@@ -61,17 +59,17 @@ const getSkinById = async (req, res, next) => {
 //?----------------------------------------------------
 
 const getAllSkin = async (req, res, next) => {
-  try {
-    const skinAll = await Skin.find();
+	try {
+		const skinAll = await Skin.find();
 
-    if (skinAll.length > 0) {
-      return res.status(200).json({ data: skinAll });
-    } else {
-      res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+		if (skinAll.length > 0) {
+			return res.status(200).json({ data: skinAll });
+		} else {
+			res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?-------------------------------------------------------
@@ -79,18 +77,18 @@ const getAllSkin = async (req, res, next) => {
 //?-------------------------------------------------------
 
 const getSkinByName = async (req, res, next) => {
-  try {
-    const { name } = req.query;
-    const skinByName = await Skin.find({ name: name });
+	try {
+		const { name } = req.query;
+		const skinByName = await Skin.find({ name: name });
 
-    if (skinByName.length > 0) {
-      return res.status(200).json({ data: skinByName });
-    } else {
-      res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+		if (skinByName.length > 0) {
+			return res.status(200).json({ data: skinByName });
+		} else {
+			res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?------------------------------------------------------
@@ -98,18 +96,18 @@ const getSkinByName = async (req, res, next) => {
 //?------------------------------------------------------
 
 const getSkinByTier = async (req, res, next) => {
-  try {
-    const { tier } = req.query;
-    const skinByTier = await Skin.find({ tier });
+	try {
+		const { tier } = req.query;
+		const skinByTier = await Skin.find({ tier });
 
-    if (skinByTier.length > 0) {
-      return res.status(200).json({ data: skinByTier });
-    } else {
-      res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+		if (skinByTier.length > 0) {
+			return res.status(200).json({ data: skinByTier });
+		} else {
+			res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?------------------------------------------------------
@@ -117,18 +115,18 @@ const getSkinByTier = async (req, res, next) => {
 //?------------------------------------------------------
 
 const getSkinByTheme = async (req, res, next) => {
-  try {
-    const { theme } = req.query;
-    const skinByTheme = await Skin.find({ theme });
+	try {
+		const { theme } = req.query;
+		const skinByTheme = await Skin.find({ theme });
 
-    if (skinByTheme.length > 0) {
-      return res.status(200).json({ data: skinByTheme });
-    } else {
-      res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+		if (skinByTheme.length > 0) {
+			return res.status(200).json({ data: skinByTheme });
+		} else {
+			res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?------------------------------------------------------
@@ -136,16 +134,14 @@ const getSkinByTheme = async (req, res, next) => {
 //?------------------------------------------------------
 
 const getTopPopularSkins = async (req, res, next) => {
-  try {
-    const skins = await Skin.find();
-    skins.sort((a, b) => b.userFav.length - a.userFav.length);
-    const top10fav = skins.slice(0, 10);
-    return res.status(200).json(top10fav);
-  } catch (error) {
-    return res
-      .status(400)
-      .json("error al mostrar el top 10 Skins más populares");
-  }
+	try {
+		const skins = await Skin.find();
+		skins.sort((a, b) => b.userFav.length - a.userFav.length);
+		const top10fav = skins.slice(0, 10);
+		return res.status(200).json(top10fav);
+	} catch (error) {
+		return res.status(400).json('error al mostrar el top 10 Skins más populares');
+	}
 };
 
 //?----------------------------------------------------
@@ -153,22 +149,22 @@ const getTopPopularSkins = async (req, res, next) => {
 //?----------------------------------------------------
 
 const greatestThemes = async (req, res, next) => {
-  const skins = await Skin.find({ id: req.params.id });
-  const conteo = skins.reduce((curr, acc) => {
-    if (acc[curr.theme]) acc[curr.theme]++;
-    else acc[curr.theme] = 1;
-  }, {});
-  const arrConteo = Object.keys(conteo).map((key) => ({
-    key,
-    recuento: conteo[key],
-  }));
-  try {
-    arrConteo.sort((a, b) => b.recuento - a.recuento);
-    const top10Themes = arrConteo.slice(0, 1);
-    return res.status(200).json(top10Themes);
-  } catch (error) {
-    return res.status(400).json("error al mostrar el Top 10 de temáticas");
-  }
+	const skins = await Skin.find({ id: req.params.id });
+	const conteo = skins.reduce((curr, acc) => {
+		if (acc[curr.theme]) acc[curr.theme]++;
+		else acc[curr.theme] = 1;
+	}, {});
+	const arrConteo = Object.keys(conteo).map((key) => ({
+		key,
+		recuento: conteo[key],
+	}));
+	try {
+		arrConteo.sort((a, b) => b.recuento - a.recuento);
+		const top10Themes = arrConteo.slice(0, 1);
+		return res.status(200).json(top10Themes);
+	} catch (error) {
+		return res.status(400).json('error al mostrar el Top 10 de temáticas');
+	}
 };
 
 //?----------------------------------------------------
@@ -176,67 +172,65 @@ const greatestThemes = async (req, res, next) => {
 //?----------------------------------------------------
 
 const updateSkin = async (req, res, next) => {
-  let catchImage = req.file?.path;
-  const { rol } = req.user;
-  if (rol !== "admin") {
-    return res.status(403).json("No permission");
-  }
-  try {
-    const { id } = req.params;
+	let catchImage = req.file?.path;
+	const { rol } = req.user;
+	if (rol !== 'admin') {
+		return res.status(403).json('No permission');
+	}
+	try {
+		const { id } = req.params;
 
-    const skinById = await Skin.findById(id);
-    if (skinById) {
-      const oldImage = skinById.image;
-      const customBody = {
-        _id: skinById._id,
-        image: req.file?.path ? req.file?.path : skinById.image,
-        tier: req.body?.tier ? req.body?.tier : skinById.tier,
-        splashArt: req.body?.splashArt
-          ? req.body?.splashArt
-          : skinById.splashArt,
-        theme: req.body?.theme ? req.body?.theme : skinById.theme,
-      };
-      await Skin.findByIdAndUpdate(id, customBody);
-      if (req.file?.path) {
-        deleteImgCloudinary(oldImage);
-      }
-      const updateNewSkin = await Skin.findById(id);
-      const elementUpdate = Object.keys(req.body);
-      let test = {};
-      elementUpdate.forEach((item) => {
-        if (req.body[item] == updateNewSkin[item]) {
-          test[item] = true;
-        } else {
-          test[item] = false;
-        }
-        if (req.file) {
-          updateNewSkin.image == req.file?.path
-            ? (test = { ...test, file: true })
-            : (test = { ...test, file: false });
-        }
-      });
-      let acc = 0;
-      for (let clave in test) {
-        if (test[clave] == false) acc++;
-      }
-      if (acc > 0) {
-        return res.status(404).json({
-          dataTest: test,
-          update: false,
-        });
-      } else {
-        return res.status(200).json({
-          dataTest: test,
-          update: updateNewSkin,
-        });
-      }
-    } else {
-      return res.status(404).json("skin not found");
-    }
-  } catch (error) {
-    if (req.file) deleteImgCloudinary(catchImage);
-    return next(error);
-  }
+		const skinById = await Skin.findById(id);
+		if (skinById) {
+			const oldImage = skinById.image;
+			const customBody = {
+				_id: skinById._id,
+				image: req.file?.path ? req.file?.path : skinById.image,
+				tier: req.body?.tier ? req.body?.tier : skinById.tier,
+				splashArt: req.body?.splashArt ? req.body?.splashArt : skinById.splashArt,
+				theme: req.body?.theme ? req.body?.theme : skinById.theme,
+			};
+			await Skin.findByIdAndUpdate(id, customBody);
+			if (req.file?.path) {
+				deleteImgCloudinary(oldImage);
+			}
+			const updateNewSkin = await Skin.findById(id);
+			const elementUpdate = Object.keys(req.body);
+			let test = {};
+			elementUpdate.forEach((item) => {
+				if (req.body[item] == updateNewSkin[item]) {
+					test[item] = true;
+				} else {
+					test[item] = false;
+				}
+				if (req.file) {
+					updateNewSkin.image == req.file?.path
+						? (test = { ...test, file: true })
+						: (test = { ...test, file: false });
+				}
+			});
+			let acc = 0;
+			for (let clave in test) {
+				if (test[clave] == false) acc++;
+			}
+			if (acc > 0) {
+				return res.status(404).json({
+					dataTest: test,
+					update: false,
+				});
+			} else {
+				return res.status(200).json({
+					dataTest: test,
+					update: updateNewSkin,
+				});
+			}
+		} else {
+			return res.status(404).json('skin not found');
+		}
+	} catch (error) {
+		if (req.file) deleteImgCloudinary(catchImage);
+		return next(error);
+	}
 };
 
 //?----------------------------------------------------
@@ -244,77 +238,77 @@ const updateSkin = async (req, res, next) => {
 //?----------------------------------------------------
 
 const addChampion = async (req, res, next) => {
-  try {
-    let arrayChampions;
-    const { id } = req.params;
-    const { champions } = req.body;
-    const { rol } = req.user;
-    if (rol !== "admin") {
-      return res.status(403).json("No permission");
-    }
+	try {
+		let arrayChampions;
+		const { id } = req.params;
+		const { champions } = req.body;
+		const { rol } = req.user;
+		if (rol !== 'admin') {
+			return res.status(403).json('No permission');
+		}
 
-    const skinById = await Skin.findById(id);
-    let updateSkin;
-    //let updateChampion = [];
-    if (skinById) {
-      arrayChampions = champions.split(",");
-      arrayChampions.forEach(async (element) => {
-        if (skinById.champions.includes(element)) {
-          try {
-            await Skin.findByIdAndUpdate(id, {
-              $pull: { champions: element },
-            });
-            updateSkin = await Skin.findById(id);
-            try {
-              await Champion.findByIdAndUpdate(element, {
-                $pull: { skins: id },
-              });
+		const skinById = await Skin.findById(id);
+		let updateSkin;
+		//let updateChampion = [];
+		if (skinById) {
+			arrayChampions = champions.split(',');
+			arrayChampions.forEach(async (element) => {
+				if (skinById.champions.includes(element)) {
+					try {
+						await Skin.findByIdAndUpdate(id, {
+							$pull: { champions: element },
+						});
+						updateSkin = await Skin.findById(id);
+						try {
+							await Champion.findByIdAndUpdate(element, {
+								$pull: { skins: id },
+							});
 
-              const updateChampion = await Champion.findById(element);
-              //updateChampion.push(updateChampion);
-            } catch (error) {
-              return res.status(404).json(error);
-            }
-          } catch (error) {
-            return res.status(404).json(error);
-          }
-        } else {
-          try {
-            await Skin.findByIdAndUpdate(id, {
-              $push: { characters: element },
-            });
-            updateSkin = await Skin.findById(id);
-            try {
-              await Champion.findByIdAndUpdate(element, {
-                $push: { skins: id },
-              });
-              const updateChampion = await Champion.findById(element);
-              //updateChampion.push(updateChar);
-            } catch (error) {
-              return res.status(404).json(error);
-            }
-          } catch (error) {
-            return res.status(404).json(error);
-          }
-        }
-      });
+							const updateChampion = await Champion.findById(element);
+							//updateChampion.push(updateChampion);
+						} catch (error) {
+							return res.status(404).json(error);
+						}
+					} catch (error) {
+						return res.status(404).json(error);
+					}
+				} else {
+					try {
+						await Skin.findByIdAndUpdate(id, {
+							$push: { characters: element },
+						});
+						updateSkin = await Skin.findById(id);
+						try {
+							await Champion.findByIdAndUpdate(element, {
+								$push: { skins: id },
+							});
+							const updateChampion = await Champion.findById(element);
+							//updateChampion.push(updateChar);
+						} catch (error) {
+							return res.status(404).json(error);
+						}
+					} catch (error) {
+						return res.status(404).json(error);
+					}
+				}
+			});
 
-      setTimeout(async () => {
-        return res.status(200).json({
-          update: await Movie.findById(id).populate({
-            path: "champions",
-            populate: {
-              path: "movies",
-            },
-          }),
-        });
-      }, 500);
-    } else {
-      return res.status(404).json("movie not found");
-    }
-  } catch (error) {
-    return next(error);
-  }
+			setTimeout(async () => {
+				return res.status(200).json({
+					update: await Movie.findById(id).populate({
+						path: 'champions',
+						populate: {
+							path: 'movies',
+						},
+					}),
+				});
+			}, 500);
+		} else {
+			return res.status(404).json('movie not found');
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 //?----------------------------------------------------
@@ -322,95 +316,92 @@ const addChampion = async (req, res, next) => {
 //?----------------------------------------------------
 
 const deleteSkin = async (req, res, next) => {
-  const { rol } = req.user;
-  if (rol !== "admin") {
-    return res.status(403).json("No permission");
-  }
-  try {
-    const { id } = req.params;
-    const skinDelete = await Skin.findByIdAndDelete(id);
-    try {
-      const test = await Champion.updateMany(
-        { skins: id },
-        { $pull: { skins: id } }
-      );
+	const { rol } = req.user;
+	if (rol !== 'admin') {
+		return res.status(403).json('No permission');
+	}
+	try {
+		const { id } = req.params;
+		const skinDelete = await Skin.findByIdAndDelete(id);
+		try {
+			const test = await Champion.updateMany({ skins: id }, { $pull: { skins: id } });
 
-      if (test.modifiedCount === test.matchedCount) {
-        try {
-          const testUser = await User.updateMany(
-            { skinsFav: id },
-            { $pull: { skinsFav: id } }
-          );
+			if (test.modifiedCount === test.matchedCount) {
+				try {
+					const testUser = await User.updateMany(
+						{ skinsFav: id },
+						{ $pull: { skinsFav: id } },
+					);
 
-          if (testUser.modifiedCount === testUser.matchedCount) {
-            return res.status(200).json({
-              testOkDelete: (await Skin.findById(id)) ? false : true,
-            });
-          } else {
-            return res.status(404).json({
-              message: "error updating User model",
-              champions: skinDelete.skins,
-              userFav: skinDelete.userFav,
-              idSkinDelete: id,
-            });
-          }
-        } catch (error) {
-          return res
-            .status(404)
-            .json({ error: "failed updating users", message: error.message });
-        }
-      } else {
-        return res.status(404).json({
-          message: "error updating Skin model",
-          champions: skinDelete.champions,
-          userFav: skinDelete.userFav,
-          idSkinDelete: id,
-        });
-      }
-    } catch (error) {
-      return res.status(404).json({
-        error: "error delete skin",
-        message: error.message,
-        idSkin: id,
-      });
-    }
-  } catch (error) {
-    return next(error);
-  }
+					if (testUser.modifiedCount === testUser.matchedCount) {
+						return res.status(200).json({
+							testOkDelete: (await Skin.findById(id)) ? false : true,
+						});
+					} else {
+						return res.status(404).json({
+							message: 'error updating User model',
+							champions: skinDelete.skins,
+							userFav: skinDelete.userFav,
+							idSkinDelete: id,
+						});
+					}
+				} catch (error) {
+					return res
+						.status(404)
+						.json({ error: 'failed updating users', message: error.message });
+				}
+			} else {
+				return res.status(404).json({
+					message: 'error updating Skin model',
+					champions: skinDelete.champions,
+					userFav: skinDelete.userFav,
+					idSkinDelete: id,
+				});
+			}
+		} catch (error) {
+			return res.status(404).json({
+				error: 'error delete skin',
+				message: error.message,
+				idSkin: id,
+			});
+		}
+	} catch (error) {
+		return next(error);
+	}
 };
 
 const errorsSolve = async (req, res, next) => {
-  const { id } = req.params;
-  try {
-    try {
-      await Champion.updateMany({ skins: id }, { $pull: { skins: id } });
+	const { id } = req.params;
+	try {
+		try {
+			await Champion.updateMany({ skins: id }, { $pull: { skins: id } });
 
-      try {
-        await User.updateMany({ skinsFav: id }, { $pull: { skinsFav: id } });
+			try {
+				await User.updateMany({ skinsFav: id }, { $pull: { skinsFav: id } });
 
-        return res.status(200).json("solve error ok");
-      } catch (error) {
-        return res.status(404).json({ message: error.message, idSkin: id });
-      }
-    } catch (error) {
-      return res.status(404).json({ message: error.message, idSkin: id });
-    }
-  } catch (error) {
-    return next({ message: error.message, idSkin: id });
-  }
+				return res.status(200).json('solve error ok');
+			} catch (error) {
+				return res.status(404).json({ message: error.message, idSkin: id });
+			}
+		} catch (error) {
+			return res.status(404).json({ message: error.message, idSkin: id });
+		}
+	} catch (error) {
+		return next({ message: error.message, idSkin: id });
+	}
 };
 
 module.exports = {
-  createSkin,
-  getSkinById,
-  getAllSkin,
-  getSkinByName,
-  updateSkin,
-  deleteSkin,
-  errorsSolve,
-  addChampion,
-  getSkinByTier,
-  getSkinByTheme,
-  getTopPopularSkins,
-  greatestThemes,
+	createSkin,
+	getSkinById,
+	getAllSkin,
+	getSkinByName,
+	updateSkin,
+	deleteSkin,
+	errorsSolve,
+	addChampion,
+	getSkinByTier,
+	getSkinByTheme,
+	getTopPopularSkins,
+	greatestThemes,
 };
