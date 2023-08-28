@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             path="*"
             element={
               <main>
-                <p>404 - No existe la ruta!</p>
+                <p>404 - No existe la ruta</p>
               </main>
             }
           ></Route>
